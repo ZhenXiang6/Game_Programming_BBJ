@@ -1,0 +1,29 @@
+# 自動處理所有文本文件的行結尾
+* text=auto
+
+# 明確指定特定文件類型的行結尾
+*.cs     text diff=csharp
+*.shader text
+*.json   text
+*.xml    text
+*.txt    text
+*.md     text
+
+# 標記二進制文件，避免行結尾轉換
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.psd    binary
+*.fbx    binary
+*.wav    binary
+*.prefab binary
+*.meta   binary
+*.anim   binary
+*.controller binary
+*.asset  binary
+*.shadergraph binary
+*.uxml   binary
+*.uss    binary
+*.scenetemplate binary
+*.vfx    binary
