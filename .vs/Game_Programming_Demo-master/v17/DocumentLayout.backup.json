@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\morri\\Desktop\\Game Programming\\Game_Programming_Demo-master\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{41378D7A-730D-CC74-69EB-42A03390BB96}|Assembly-CSharp.csproj|C:\\Users\\morri\\Desktop\\Game Programming\\Game_Programming_Demo-master\\assets\\script\\camerafollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41378D7A-730D-CC74-69EB-42A03390BB96}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\camerafollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41378D7A-730D-CC74-69EB-42A03390BB96}|Assembly-CSharp.csproj|c:\\users\\morri\\desktop\\game programming\\game_programming_demo-master\\assets\\script\\blockbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41378D7A-730D-CC74-69EB-42A03390BB96}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\blockbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41378D7A-730D-CC74-69EB-42A03390BB96}|Assembly-CSharp.csproj|c:\\users\\morri\\desktop\\game programming\\game_programming_demo-master\\assets\\script\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41378D7A-730D-CC74-69EB-42A03390BB96}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BlockBuilder.cs",
+              "DocumentMoniker": "C:\\Users\\morri\\Desktop\\Game Programming\\Game_Programming_Demo-master\\Assets\\script\\BlockBuilder.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\BlockBuilder.cs",
+              "ToolTip": "C:\\Users\\morri\\Desktop\\Game Programming\\Game_Programming_Demo-master\\Assets\\script\\BlockBuilder.cs",
+              "RelativeToolTip": "Assets\\script\\BlockBuilder.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAiwHQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T11:59:05.974Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CameraFollow.cs",
+              "DocumentMoniker": "C:\\Users\\morri\\Desktop\\Game Programming\\Game_Programming_Demo-master\\Assets\\script\\CameraFollow.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\CameraFollow.cs",
+              "ToolTip": "C:\\Users\\morri\\Desktop\\Game Programming\\Game_Programming_Demo-master\\Assets\\script\\CameraFollow.cs",
+              "RelativeToolTip": "Assets\\script\\CameraFollow.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAiwCIAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T11:20:26.767Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\morri\\Desktop\\Game Programming\\Game_Programming_Demo-master\\Assets\\script\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\PlayerController.cs",
+              "ToolTip": "C:\\Users\\morri\\Desktop\\Game Programming\\Game_Programming_Demo-master\\Assets\\script\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\script\\PlayerController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAMwEUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T11:14:49.586Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
