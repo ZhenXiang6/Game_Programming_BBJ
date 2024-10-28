@@ -112,6 +112,28 @@ public class BlockBuilder : MonoBehaviour
 
     }
 
+    public void ResetBlocks()
+    {
+        // Destroy all placed blocks
+        foreach (var blockList in placedBlocks.Values)
+        {
+            foreach (GameObject block in blockList)
+            {
+                Destroy(block);
+            }
+            blockList.Clear();
+        }
+
+        // Reset the block count for each type
+        blocksHold["black"] = 10;
+        blocksHold["red"] = 10;
+
+        // Update the UI to reflect the reset counts
+        UpdateUI();
+
+        Debug.Log("All blocks cleared, and block count reset.");
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (buildPoint != null)

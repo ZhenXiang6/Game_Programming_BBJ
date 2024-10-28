@@ -21,9 +21,11 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Vector3 originalScale;
     private Vector3 spawnPosition; // Original spawn position
+    private BlockBuilder blockBuilder;
 
     void Start()
     {
+        blockBuilder = GetComponent<BlockBuilder>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -134,6 +136,11 @@ public class PlayerController : MonoBehaviour
         transform.position = spawnPosition;
         rb.velocity = Vector2.zero; // Reset velocity
         Debug.Log("Player respawned to the original position.");
+
+        if (blockBuilder != null)
+        {
+            blockBuilder.ResetBlocks(); // Reset blocks upon respawn
+        }
     }
 
     private void OnDrawGizmosSelected()
