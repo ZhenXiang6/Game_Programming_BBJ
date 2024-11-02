@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool wasGrounded;
-
+    public bool PlayerCanMove = true;
     private SpriteRenderer spriteRenderer;
     private Vector3 originalScale;
     private Vector3 spawnPosition; // Original spawn position
@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     void HandleMovement()
     {
         float move = Input.GetAxis("Horizontal");
+        if (!PlayerCanMove) move = 0;
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
 
         if (anim != null)
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
     void HandleJump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && PlayerCanMove)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             if (anim != null)

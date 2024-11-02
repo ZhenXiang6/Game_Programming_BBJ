@@ -1,22 +1,22 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using Unity.Loading;
 using UnityEngine.SceneManagement;
+
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
 
-    public GameObject pauseMenuUI;
-    void Update ()
+    public GameObject pauseMenuUI; // Reference to the pause menu UI
+    public GameObject bagPanel; // Reference to the Bag panel
+
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused)
             {
                 Resume();
-            } 
+            }
             else
             {
                 Pause();
@@ -24,24 +24,26 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public void Resume ()
+    public void Resume()
     {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
+        pauseMenuUI.SetActive(false); // Hide the pause menu UI
+        bagPanel.SetActive(false); // Hide the Bag panel
+        Time.timeScale = 1f; // Resume the game
+        GameIsPaused = false; // Set the paused state to false
     }
 
-    void Pause ()
+    void Pause()
     {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
+        pauseMenuUI.SetActive(true); // Show the pause menu UI
+        bagPanel.SetActive(false); // Ensure the Bag panel is inactive when pausing
+        Time.timeScale = 0f; // Pause the game
+        GameIsPaused = true; // Set the paused state to true
     }
 
     public void LoadMenu()
     {
         Debug.Log("Loading Menu....");
-        Resume();
-        SceneManager.LoadScene("Main");
+        Resume(); // Resume the game before loading the menu
+        SceneManager.LoadScene("Main"); // Load the main menu scene
     }
 }
