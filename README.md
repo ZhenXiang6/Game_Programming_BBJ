@@ -4,3 +4,4 @@
 4. 新增 Pause 功能
 5. add tilemap(11/01 09:05)
 6. let camera wider(11/01 09:05)
+7. Fix the issue that character stick on wall and the animation transition problem (1102 0842)
