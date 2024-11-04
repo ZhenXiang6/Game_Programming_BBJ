@@ -1452,6 +1452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 662732295}
+  bagPanel: {fileID: 0}
 --- !u!1 &696642192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,6 +1703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 662732295}
+  bagPanel: {fileID: 0}
 --- !u!1 &1172832554
 GameObject:
   m_ObjectHideFlags: 3
@@ -2829,14 +2831,6 @@ CompositeCollider2D:
         Y: -40000000
       - X: -1006875008
         Y: -40000000
-    - - X: -530000000
-        Y: -30000000
-      - X: -590000000
-        Y: -30000000
-      - X: -590000000
-        Y: -50000000
-      - X: -530000000
-        Y: -50000000
     - - X: -780000000
         Y: -52500000
       - X: -780000000
