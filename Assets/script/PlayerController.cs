@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour
         {
             if (anim != null)
             {
+                anim.ResetTrigger("Jump");
                 anim.SetTrigger("LandingTrigger");
             }
         }
