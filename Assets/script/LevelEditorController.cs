@@ -8,20 +8,24 @@ public class LevelEditorController : MonoBehaviour
 {
     public static MapData currentMapData;
 
-    public GameObject[] blockPrefabs;      // 方塊預置物的數組
-    public Transform mapContainer;         // 地圖方塊的父物件
-    public Button startGameButton;         // 開始遊戲按鈕
-    public Button clearButton;             // 清除地圖按鈕
-    public Button saveMapButton;           // 儲存地圖按鈕
-    public Button loadMapButton;           // 載入地圖按鈕
-    public Button resetMapButton;          // 重置地圖按鈕
-    public Toggle deleteModeToggle;        // 刪除模式按鈕
-    public GameObject selectedBlockPrefab; // 當前選擇的方塊
-    public int rotationAngle = 90;         // 每次旋轉的角度
-    private bool isDeleteMode = false;     // 刪除模式開關
+    public GameObject[] blockPrefabs;
+    public Transform mapContainer;
+    public Button startGameButton;
+    public Button clearButton;
+    public Button saveMapButton;
+    public Button loadMapButton;
+    public Button resetMapButton;
+    public Button selectModeButton;
+    public GameObject darkOverlay;          // 暗色遮罩
+    public int rotationAngle = 90;
+    public float gridSpacing = 1f;
 
+    private bool isSelectMode = false;             // 是否進入選取模式
+    private GameObject previewBlock;
+    private GameObject selectedBlockPrefab;
+    private GameObject selectedBlock;
     private List<GameObject> placedBlocks = new List<GameObject>();
-    private float gridSpacing;
+    private List<GameObject> initialBlocks = new List<GameObject>();
 
     void Start()
     {
@@ -30,7 +34,7 @@ public class LevelEditorController : MonoBehaviour
         saveMapButton.onClick.AddListener(SaveMap);
         loadMapButton.onClick.AddListener(LoadMap);
         resetMapButton.onClick.AddListener(ResetMap);
-        deleteModeToggle.onValueChanged.AddListener(ToggleDeleteMode);
+        selectModeButton.onClick.AddListener(ToggleSelectMode);
 
         if (currentMapData == null)
         {
@@ -40,56 +44,183 @@ public class LevelEditorController : MonoBehaviour
         {
             LoadMap(currentMapData);
         }
-        
+
+        // 隱藏暗色遮罩
+        darkOverlay.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (isSelectMode)
         {
-            if (isDeleteMode)
-            {
-                DeleteBlock();
-            }
-            else
-            {
-                PlaceBlock();
-            }
+            HandleBlockSelection();
+            HandleSelectedBlockMovement();
+            HandleBlockDeletion();
         }
-
-        if (Input.GetKeyDown(KeyCode.R))
+        else
         {
-            RotateSelectedBlock();
+            HandlePreviewBlock();
+            HandleBlockPlacement();
         }
     }
 
-    void PlaceBlock()
+    // 切換選取模式
+   void ToggleSelectMode()
+{
+    isSelectMode = !isSelectMode;
+    
+    if (isSelectMode)
     {
-        if (selectedBlockPrefab != null)
+        // 進入選取模式，顯示暗色遮罩
+        darkOverlay.SetActive(true);
+        selectedBlockPrefab = null;
+        if (previewBlock != null)
         {
-        Vector3 mousePosition = GetMouseWorldPosition();
-        
-        // 將鼠標位置對齊至最近的網格點
-        mousePosition.x = Mathf.Round(mousePosition.x / gridSpacing) * gridSpacing;
-        mousePosition.y = Mathf.Round(mousePosition.y / gridSpacing) * gridSpacing;
-        
-        GameObject newBlock = Instantiate(selectedBlockPrefab, mousePosition, Quaternion.identity, mapContainer);
-        placedBlocks.Add(newBlock);
+            Destroy(previewBlock); // 清除預覽方塊
         }
     }
+    else
+    {
+        // 退出選取模式，隱藏暗色遮罩並取消選中
+        darkOverlay.SetActive(false);
+        DeselectBlock();
+    }
+}
 
-
-    void DeleteBlock()
+    // 處理選取模式下的方塊選取
+    void HandleBlockSelection()
+{
+    if (Input.GetMouseButtonDown(0))
     {
         Vector3 mousePosition = GetMouseWorldPosition();
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
         if (hit.collider != null && placedBlocks.Contains(hit.collider.gameObject))
         {
-            placedBlocks.Remove(hit.collider.gameObject);
-            Destroy(hit.collider.gameObject);
+            // 如果點擊的方塊合法，設置為選中
+            DeselectBlock(); // 取消之前的選中
+            selectedBlock = hit.collider.gameObject;
+            HighlightBlock(selectedBlock, true);
         }
     }
+}
+    // 取消選中的方塊
+    void DeselectBlock()
+    {
+        if (selectedBlock != null)
+        {
+            HighlightBlock(selectedBlock, false); // 移除高亮效果
+            selectedBlock = null;
+        }
+    }
+
+    // 控制選中方塊的移動和旋轉
+    void HandleSelectedBlockMovement()
+{
+    if (selectedBlock != null)
+    {
+        Vector3 mousePosition = GetMouseWorldPosition();
+        Vector3 targetPosition = SnapToGrid(mousePosition);
+
+        if (Input.GetMouseButton(0)) // 按住左鍵拖動方塊
+        {
+            // 使用 OverlapCircle 檢查目標位置是否已有方塊
+            float checkRadius = gridSpacing / 2f;
+            Collider2D overlap = Physics2D.OverlapCircle(targetPosition, checkRadius);
+
+            // 如果重疊對象為空或者為當前選中方塊本身，則允許移動
+            if (overlap == null || overlap.gameObject == selectedBlock)
+            {
+                selectedBlock.transform.position = targetPosition;
+            }
+            else
+            {
+                Debug.Log("該位置已有方塊，無法移動到該位置。");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q)) // Q 鍵逆時針旋轉
+        {
+            selectedBlock.transform.Rotate(0, 0, rotationAngle);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E)) // E 鍵順時針旋轉
+        {
+            selectedBlock.transform.Rotate(0, 0, -rotationAngle);
+        }
+    }
+}
+
+
+    // 刪除選中的方塊
+    void HandleBlockDeletion()
+    {
+        if (selectedBlock != null && Input.GetKeyDown(KeyCode.Delete))
+        {
+            placedBlocks.Remove(selectedBlock);
+            Destroy(selectedBlock);
+            selectedBlock = null;
+        }
+    }
+
+    // 高亮或取消高亮顯示選中的方塊
+    void HighlightBlock(GameObject block, bool highlight)
+    {
+        var spriteRenderer = block.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            // 如果高亮，設置顏色為亮色；否則設置為原色
+            spriteRenderer.color = highlight ? Color.yellow : Color.white;
+        }
+    }
+
+
+    // 使預覽方塊跟隨鼠標移動
+    void HandlePreviewBlock()
+    {
+        if (previewBlock != null && selectedBlockPrefab != null)
+        {
+            Vector3 mousePosition = GetMouseWorldPosition();
+            previewBlock.transform.position = SnapToGrid(mousePosition);
+        }
+    }
+
+    // 處理方塊放置
+    void HandleBlockPlacement()
+{
+    if (selectedBlockPrefab == null || isSelectMode) return;
+
+    if (Input.GetMouseButtonDown(0) && previewBlock != null) // 左鍵放置新方塊
+    {
+        Vector3 position = previewBlock.transform.position;
+        
+        // 使用 OverlapCircle 檢查位置附近是否已有方塊
+        float checkRadius = gridSpacing / 2f; // 檢查半徑設為半個網格大小
+        Collider2D overlap = Physics2D.OverlapCircle(position, checkRadius);
+
+        // 如果沒有重疊，則放置方塊
+        if (overlap == null)
+        {
+            GameObject newBlock = Instantiate(selectedBlockPrefab, position, Quaternion.identity, mapContainer);
+            placedBlocks.Add(newBlock);
+        }
+        else
+        {
+            Debug.Log("該位置已有方塊，無法放置。");
+        }
+    }
+}
+
+
+    // 將位置對齊到網格
+   Vector3 SnapToGrid(Vector3 position)
+{
+    // 計算網格對齊的中心點
+    float snappedX = Mathf.Round((position.x - gridSpacing / 2f) / gridSpacing) * gridSpacing + gridSpacing / 2f;
+    float snappedY = Mathf.Round((position.y - gridSpacing / 2f) / gridSpacing) * gridSpacing + gridSpacing / 2f;
+
+    return new Vector3(snappedX, snappedY, position.z);
+}
 
     Vector3 GetMouseWorldPosition()
     {
@@ -98,32 +229,28 @@ public class LevelEditorController : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePos);
     }
 
+    // 選擇一個方塊類型並顯示預覽
     public void SelectBlock(int index)
     {
         if (index >= 0 && index < blockPrefabs.Length)
         {
+            if (previewBlock != null)
+            {
+                Destroy(previewBlock);
+            }
+
             selectedBlockPrefab = blockPrefabs[index];
-            isDeleteMode = false; // 取消刪除模式
+            previewBlock = Instantiate(selectedBlockPrefab);
+            previewBlock.GetComponent<Collider2D>().enabled = false; // 關閉預覽方塊的碰撞
+            selectedBlock = null; // 取消選中的已放置方塊
+            isSelectMode = false; // 自動退出選取模式
+            selectModeButton.interactable = true; // 更新選取模式按鈕狀態
         }
     }
 
-    public void ToggleDeleteMode(bool isOn)
-    {
-        isDeleteMode = isOn;
-        if (isDeleteMode)
-        {
-            Debug.Log("DeleteModeOn");
-            selectedBlockPrefab = null; // 在刪除模式下清除選中的方塊
-        }
-    }
-    public void RotateSelectedBlock()
-    {
-        if (selectedBlockPrefab != null)
-        {
-            selectedBlockPrefab.transform.Rotate(0, 0, rotationAngle);
-        }
-    }
 
+
+    // 儲存、載入、清除等其他功能
     public void SaveMap()
     {
         MapData mapData = new MapData();
@@ -193,12 +320,12 @@ public class LevelEditorController : MonoBehaviour
     void LoadDefaultMap()
     {
         GameObject defaultBlock = Instantiate(blockPrefabs[0], new Vector3(0, 0, 0), Quaternion.identity, mapContainer);
-        placedBlocks.Add(defaultBlock);
+        initialBlocks.Add(defaultBlock);
     }
 
-    void StartGame()
+    public void StartGame()
     {
-        SceneManager.LoadScene("RunScene");
+        SceneManager.LoadScene("Level");
     }
 
     GameObject FindBlockPrefab(string blockType)
@@ -213,4 +340,3 @@ public class LevelEditorController : MonoBehaviour
         return null;
     }
 }
-
