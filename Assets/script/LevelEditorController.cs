@@ -65,7 +65,7 @@ public class LevelEditorController : MonoBehaviour
     }
 
     // 切換選取模式
-   void ToggleSelectMode()
+   public void ToggleSelectMode()
 {
     isSelectMode = !isSelectMode;
     
@@ -107,6 +107,8 @@ public class LevelEditorController : MonoBehaviour
     // 取消選中的方塊
     void DeselectBlock()
     {
+        Vector3 mousePosition = GetMouseWorldPosition();
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
         if (selectedBlock != null)
         {
             HighlightBlock(selectedBlock, false); // 移除高亮效果
@@ -169,8 +171,11 @@ public class LevelEditorController : MonoBehaviour
         var spriteRenderer = block.GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
-            // 如果高亮，設置顏色為亮色；否則設置為原色
-            spriteRenderer.color = highlight ? Color.yellow : Color.white;
+            Color color = spriteRenderer.color;
+
+            color.a = highlight ? 0.5f : 1f;
+
+            spriteRenderer.color = color;
         }
     }
 
@@ -325,7 +330,7 @@ public class LevelEditorController : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Level");
+        SceneManager.LoadScene("Level1");
     }
 
     GameObject FindBlockPrefab(string blockType)

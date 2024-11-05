@@ -293,7 +293,6 @@ GameObject:
   - component: {fileID: 222702241}
   - component: {fileID: 222702240}
   - component: {fileID: 222702239}
-  - component: {fileID: 222702242}
   - component: {fileID: 222702243}
   m_Layer: 0
   m_Name: Main Camera
@@ -376,23 +375,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &222702242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 222702238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948dbda8b555dfe498551b47bec36a0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1945100931}
-  smoothing: 5
-  offset: {x: 0, y: 0, z: 0}
-  minPosition: {x: -50, y: -50}
-  maxPosition: {x: 50, y: 50}
 --- !u!114 &222702243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1484,6 +1466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 662732295}
   bagPanel: {fileID: 324017867}
+  endMenuUI: {fileID: 0}
 --- !u!1 &696642192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1810,6 +1793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 662732295}
   bagPanel: {fileID: 324017867}
+  endMenuUI: {fileID: 0}
 --- !u!1 &767554381
 GameObject:
   m_ObjectHideFlags: 0
@@ -3904,7 +3888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc7ef60915818040be220193fde7a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSceneName: Level1
+  targetSceneName: Level1_editor
   pressEText: {fileID: 168158407}
 --- !u!61 &1436482777
 BoxCollider2D:
