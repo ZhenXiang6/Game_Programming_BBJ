@@ -14,14 +14,24 @@ public class PlayerController : MonoBehaviour
     [Header("动画参数")]
     public Animator anim;
 
+    [Header("冲刺参数")]
+    public float dashSpeed = 20f;        // 冲刺速度
+    public float dashDuration = 0.2f;    // 冲刺持续时间
+    public float dashCooldown = 1f;      // 冲刺冷却时间
+
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool wasGrounded;
     public bool PlayerCanMove = true;
     private SpriteRenderer spriteRenderer;
-    private Vector3 originalScale;
-    private Vector3 spawnPosition; // Original spawn position
+    private Vector3 originalScale;        // 原始缩放
+    private Vector3 spawnPosition;        // 原始生成位置
     private BlockBuilder blockBuilder;
+
+    // Dash 状态变量
+    private bool isDashing = false;
+    private float dashTimeLeft;
+    private float lastDashTime = -100f;   // 初始化为足够小的值
 
     void Start()
     {
@@ -31,7 +41,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalScale = transform.localScale;
 
-        spawnPosition = transform.position; // Store the initial spawn position
+        spawnPosition = transform.position; // 存储初始生成位置
 
         if (anim == null)
         {
@@ -49,11 +59,14 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleJump();
         HandleFalling();
+        HandleDash();    // 处理 Dash
         FlipSprite();
     }
 
     void HandleMovement()
     {
+        if (isDashing) return; // Dash 期间禁用常规移动
+
         float move = Input.GetAxis("Horizontal");
         if (!PlayerCanMove) move = 0;
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
@@ -66,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
     void HandleJump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded && PlayerCanMove)
+        if (Input.GetButtonDown("Jump") && isGrounded && PlayerCanMove && !isDashing)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             if (anim != null)
@@ -111,6 +124,57 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void HandleDash()
+    {
+        // 检查是否可以开始 Dash（冷却时间已过）
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown && PlayerCanMove)
+        {
+            StartDash();
+        }
+
+        if (isDashing)
+        {
+            if (dashTimeLeft > 0)
+            {
+                dashTimeLeft -= Time.deltaTime;
+                // 保持 Dash 方向
+                float dashDirection = spriteRenderer.flipX ? -1f : 1f;
+                rb.velocity = new Vector2(dashDirection * dashSpeed, rb.velocity.y);
+            }
+            else
+            {
+                StopDash();
+            }
+        }
+    }
+
+    void StartDash()
+    {
+        isDashing = true;
+        dashTimeLeft = dashDuration;
+        lastDashTime = Time.time;
+
+        if (anim != null)
+        {
+            anim.SetTrigger("Dash"); // 触发 Dash 动画
+        }
+
+        Debug.Log("Dash Started");
+    }
+
+    void StopDash()
+    {
+        isDashing = false;
+        rb.velocity = new Vector2(0, rb.velocity.y); // 恢复常规速度
+
+        if (anim != null)
+        {
+            anim.ResetTrigger("Dash"); // 重置 Dash 动画触发器
+        }
+
+        Debug.Log("Dash Ended");
+    }
+
     void FlipSprite()
     {
         float move = Input.GetAxis("Horizontal");
@@ -136,12 +200,12 @@ public class PlayerController : MonoBehaviour
     private void Respawn()
     {
         transform.position = spawnPosition;
-        rb.velocity = Vector2.zero; // Reset velocity
+        rb.velocity = Vector2.zero; // 重置速度
         Debug.Log("Player respawned to the original position.");
 
         if (blockBuilder != null)
         {
-            blockBuilder.ResetBlocks(); // Reset blocks upon respawn
+            blockBuilder.ResetBlocks(); // 在复活时重置方块
         }
     }
 

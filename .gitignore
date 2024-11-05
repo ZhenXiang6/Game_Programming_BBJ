@@ -16,3 +16,4 @@
 *.pdb
 *.opendb
 *.VC.db
+.vs/
