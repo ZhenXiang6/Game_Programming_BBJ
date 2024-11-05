@@ -8,19 +8,34 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI; // Reference to the pause menu UI
     public GameObject bagPanel; // Reference to the Bag panel
+    public GameObject endMenuUI;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused)
-            {
-                Resume();
+            if (endMenuUI == null){
+                if (GameIsPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
             }
-            else
+            else if(endMenuUI.activeSelf == false)
             {
-                Pause();
+                if (GameIsPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
             }
+
         }
     }
 

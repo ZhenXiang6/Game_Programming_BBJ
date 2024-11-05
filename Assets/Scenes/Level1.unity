@@ -843,9 +843,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 738442249}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: LoadMenu
+      - m_Target: {fileID: 738442250}
+        m_TargetAssemblyTypeName: EndMenu, Assembly-CSharp
+        m_MethodName: LoadLevelSelector
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1720,7 +1720,6 @@ GameObject:
   - component: {fileID: 662732296}
   - component: {fileID: 662732298}
   - component: {fileID: 662732297}
-  - component: {fileID: 662732299}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -1787,20 +1786,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662732295}
   m_CullTransparentMesh: 1
---- !u!114 &662732299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 662732295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 393f8f151e33318439ccf4eab03d0e92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 662732295}
-  bagPanel: {fileID: 0}
 --- !u!1 &696642192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1948,6 +1933,7 @@ GameObject:
   - component: {fileID: 738442246}
   - component: {fileID: 738442245}
   - component: {fileID: 738442249}
+  - component: {fileID: 738442250}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2053,6 +2039,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 662732295}
   bagPanel: {fileID: 155749428}
+  endMenuUI: {fileID: 298099148}
+--- !u!114 &738442250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738442244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aedccb3ebd98184488fbe30ac2bd204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endMenuUI: {fileID: 298099148}
 --- !u!1 &1172832554
 GameObject:
   m_ObjectHideFlags: 3

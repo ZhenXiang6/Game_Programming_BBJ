@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class EndMenuTrigger : MonoBehaviour
+public class EndMenu : MonoBehaviour
 {
     public GameObject endMenuUI; // Reference to the end menu UI
 
@@ -21,10 +21,10 @@ public class EndMenuTrigger : MonoBehaviour
         Time.timeScale = 0f; // Pause the game
     }
 
-    public void LoadMainMenu()
+    public void LoadLevelSelector()
     {
-        Debug.Log("Loading Main Menu...");
+        Debug.Log("Loading Level Selector...");
         Time.timeScale = 1f; // Reset game speed before loading the menu
-        SceneManager.LoadScene("Main"); // Load the main menu scene
+        SceneManager.LoadScene("Level Selector"); // Load the main menu scene
     }
 }
