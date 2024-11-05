@@ -12,3 +12,4 @@
 12. let camera wider(11/01 09:05)
 13. Fix the issue that character stick on wall and the animation transition problem (1102 0842)
 14. add ice and teleport cube(code未完成) (1105 0012)
+15. add dash (1105 2319)
