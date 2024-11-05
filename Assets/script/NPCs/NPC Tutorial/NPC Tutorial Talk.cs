@@ -21,7 +21,7 @@ public class NPCTutorialTalk : MonoBehaviour
         isTalking = false;
         PressEHint.SetActive(false);
 
-        flowerSys = FlowerManager.Instance.CreateFlowerSystem("FlowerSample", false);
+        flowerSys = FlowerManager.Instance.CreateFlowerSystem("FlowerSample", true);
 
         // Register commands and effects if needed
         flowerSys.RegisterCommand("UsageCase", CustomizedFunction);
