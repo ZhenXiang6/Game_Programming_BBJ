@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class LevelEditorController : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class LevelEditorController : MonoBehaviour
     public float gridSpacing = 1f;
 
     private bool isSelectMode = false;             // 是否進入選取模式
+    
     private GameObject previewBlock;
     private GameObject selectedBlockPrefab;
     private GameObject selectedBlock;
@@ -90,6 +92,10 @@ public class LevelEditorController : MonoBehaviour
     // 處理選取模式下的方塊選取
     void HandleBlockSelection()
 {
+    // 如果滑鼠在 UI 上，則不進行選取操作
+    if (EventSystem.current.IsPointerOverGameObject()) 
+        return;
+
     if (Input.GetMouseButtonDown(0))
     {
         Vector3 mousePosition = GetMouseWorldPosition();
@@ -97,10 +103,13 @@ public class LevelEditorController : MonoBehaviour
 
         if (hit.collider != null && placedBlocks.Contains(hit.collider.gameObject))
         {
-            // 如果點擊的方塊合法，設置為選中
             DeselectBlock(); // 取消之前的選中
             selectedBlock = hit.collider.gameObject;
             HighlightBlock(selectedBlock, true);
+        }
+        else
+        {
+            ToggleSelectMode(); // 點擊空白或非法方塊時，退出選取模式
         }
     }
 }
@@ -193,17 +202,18 @@ public class LevelEditorController : MonoBehaviour
     // 處理方塊放置
     void HandleBlockPlacement()
 {
-    if (selectedBlockPrefab == null || isSelectMode) return;
+    // 如果滑鼠在 UI 上，則不進行放置方塊操作
+    if (selectedBlockPrefab == null || isSelectMode || EventSystem.current.IsPointerOverGameObject()) 
+        return;
 
     if (Input.GetMouseButtonDown(0) && previewBlock != null) // 左鍵放置新方塊
     {
         Vector3 position = previewBlock.transform.position;
         
         // 使用 OverlapCircle 檢查位置附近是否已有方塊
-        float checkRadius = gridSpacing / 2f; // 檢查半徑設為半個網格大小
+        float checkRadius = gridSpacing / 2f;
         Collider2D overlap = Physics2D.OverlapCircle(position, checkRadius);
 
-        // 如果沒有重疊，則放置方塊
         if (overlap == null)
         {
             GameObject newBlock = Instantiate(selectedBlockPrefab, position, Quaternion.identity, mapContainer);
@@ -217,13 +227,16 @@ public class LevelEditorController : MonoBehaviour
 }
 
 
+
     // 將位置對齊到網格
-   Vector3 SnapToGrid(Vector3 position)
-    {
-        position.x = Mathf.Round(position.x / gridSpacing) * gridSpacing + gridSpacing / 2f;
-        position.y = Mathf.Round(position.y / gridSpacing) * gridSpacing + gridSpacing / 2f;
-        return position;
-    }
+      Vector3 SnapToGrid(Vector3 position)
+{
+    // 計算網格對齊的中心點
+    float snappedX = Mathf.Round((position.x - gridSpacing / 2f) / gridSpacing) * gridSpacing + gridSpacing / 2f;
+    float snappedY = Mathf.Round((position.y - gridSpacing / 2f) / gridSpacing) * gridSpacing + gridSpacing / 2f;
+
+    return new Vector3(snappedX, snappedY, position.z);
+}
 
 
     Vector3 GetMouseWorldPosition()
@@ -270,8 +283,8 @@ public class LevelEditorController : MonoBehaviour
 
         currentMapData = mapData;
         string json = JsonUtility.ToJson(mapData, true);
-        File.WriteAllText(Application.persistentDataPath + "/mapData.json", json);
-        Debug.Log("Map saved to " + Application.persistentDataPath + "/mapData.json");
+        File.WriteAllText(Application.persistentDataPath + "/mapData_level1.json", json);
+        Debug.Log("Map saved to " + Application.persistentDataPath + "/mapData_level1.json");
     }
 
     public void LoadMap(MapData mapData)
@@ -291,7 +304,7 @@ public class LevelEditorController : MonoBehaviour
 
     public void LoadMap()
     {
-        string path = Application.persistentDataPath + "/mapData.json";
+        string path = Application.persistentDataPath + "/mapData_level1.json";
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
