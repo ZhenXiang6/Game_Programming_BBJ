@@ -219,13 +219,12 @@ public class LevelEditorController : MonoBehaviour
 
     // 將位置對齊到網格
    Vector3 SnapToGrid(Vector3 position)
-{
-    // 計算網格對齊的中心點
-    float snappedX = Mathf.Round((position.x - gridSpacing / 2f) / gridSpacing) * gridSpacing + gridSpacing / 2f;
-    float snappedY = Mathf.Round((position.y - gridSpacing / 2f) / gridSpacing) * gridSpacing + gridSpacing / 2f;
+    {
+        position.x = Mathf.Round(position.x / gridSpacing) * gridSpacing + gridSpacing / 2f;
+        position.y = Mathf.Round(position.y / gridSpacing) * gridSpacing + gridSpacing / 2f;
+        return position;
+    }
 
-    return new Vector3(snappedX, snappedY, position.z);
-}
 
     Vector3 GetMouseWorldPosition()
     {
