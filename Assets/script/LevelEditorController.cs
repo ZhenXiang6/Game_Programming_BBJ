@@ -108,10 +108,6 @@ public class LevelEditorController : MonoBehaviour
             selectedBlock = hit.collider.gameObject;
             HighlightBlock(selectedBlock, true);
         }
-        else
-        {
-            ToggleSelectMode(); // 點擊空白或非法方塊時，退出選取模式
-        }
     }
 }
     // 取消選中的方塊
@@ -129,6 +125,8 @@ public class LevelEditorController : MonoBehaviour
     // 控制選中方塊的移動和旋轉
     void HandleSelectedBlockMovement()
 {
+    if (EventSystem.current.IsPointerOverGameObject()) 
+        return;
     if (selectedBlock != null)
     {
         Vector3 mousePosition = GetMouseWorldPosition();
@@ -183,7 +181,7 @@ public class LevelEditorController : MonoBehaviour
         {
             Color color = spriteRenderer.color;
 
-            color.a = highlight ? 0.5f : 1f;
+            color.a = highlight ? 0.7f : 1f;
 
             spriteRenderer.color = color;
         }
@@ -250,7 +248,7 @@ public class LevelEditorController : MonoBehaviour
     // 選擇一個方塊類型並顯示預覽
     public void SelectBlock(int index)
     {
-        if (index >= 0 && index < blockPrefabs.Length)
+        if (index >= 0 && index < blockPrefabs.Length && isSelectMode == false)
         {
             if (previewBlock != null)
             {
