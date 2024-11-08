@@ -22,7 +22,15 @@ public class MapLoader : MonoBehaviour
             MapData mapData = JsonUtility.FromJson<MapData>(json);
 
             // 根據地圖數據生成方塊
-            foreach (BlockData blockData in mapData.blocks)
+            foreach (BlockData blockData in mapData.defaultBlocks)
+            {
+                GameObject prefab = FindBlockPrefab(blockData.blockType);
+                if (prefab != null)
+                {
+                    Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
+                }
+            }
+            foreach (BlockData blockData in mapData.playerBlocks)
             {
                 GameObject prefab = FindBlockPrefab(blockData.blockType);
                 if (prefab != null)

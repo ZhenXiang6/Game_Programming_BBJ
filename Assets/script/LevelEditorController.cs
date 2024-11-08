@@ -14,8 +14,6 @@ public class LevelEditorController : MonoBehaviour
     public Button startGameButton;
     public Button clearButton;
     public Button saveMapButton;
-    public Button loadMapButton;
-    public Button resetMapButton;
     public Button selectModeButton;
     public GameObject darkOverlay;          // 暗色遮罩
     public int rotationAngle = 90;
@@ -26,8 +24,8 @@ public class LevelEditorController : MonoBehaviour
     private GameObject previewBlock;
     private GameObject selectedBlockPrefab;
     private GameObject selectedBlock;
-    private List<GameObject> placedBlocks = new List<GameObject>();
-    private List<GameObject> initialBlocks = new List<GameObject>();
+    private List<GameObject> placedPlayerBlocks = new List<GameObject>(); // 僅玩家方塊
+    private List<GameObject> placedDefaultBlocks = new List<GameObject>(); // 僅預設方塊
 
     private const string MapKey = "MapData_Level1"; // 在 PlayerPrefs 中的鍵名
 
@@ -36,17 +34,9 @@ public class LevelEditorController : MonoBehaviour
         startGameButton.onClick.AddListener(StartGame);
         clearButton.onClick.AddListener(ClearMap);
         saveMapButton.onClick.AddListener(SaveMap);
-        resetMapButton.onClick.AddListener(ResetMap);
         selectModeButton.onClick.AddListener(ToggleSelectMode);
 
-        if (currentMapData == null)
-        {
-            LoadDefaultMap();
-        }
-        else
-        {
-            LoadMap(currentMapData);
-        }
+        LoadMapFromPlayerPrefs();
 
         // 隱藏暗色遮罩
         darkOverlay.SetActive(false);
@@ -102,7 +92,7 @@ public class LevelEditorController : MonoBehaviour
         Vector3 mousePosition = GetMouseWorldPosition();
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
-        if (hit.collider != null && placedBlocks.Contains(hit.collider.gameObject))
+        if (hit.collider != null && placedPlayerBlocks.Contains(hit.collider.gameObject))
         {
             DeselectBlock(); // 取消之前的選中
             selectedBlock = hit.collider.gameObject;
@@ -167,7 +157,7 @@ public class LevelEditorController : MonoBehaviour
     {
         if (selectedBlock != null && Input.GetKeyDown(KeyCode.Delete))
         {
-            placedBlocks.Remove(selectedBlock);
+            placedPlayerBlocks.Remove(selectedBlock);
             Destroy(selectedBlock);
             selectedBlock = null;
         }
@@ -208,6 +198,7 @@ public class LevelEditorController : MonoBehaviour
     if (Input.GetMouseButtonDown(0) && previewBlock != null) // 左鍵放置新方塊
     {
         Vector3 position = previewBlock.transform.position;
+        position.z = 0;
         
         // 使用 OverlapCircle 檢查位置附近是否已有方塊
         float checkRadius = gridSpacing / 2f;
@@ -216,7 +207,7 @@ public class LevelEditorController : MonoBehaviour
         if (overlap == null)
         {
             GameObject newBlock = Instantiate(selectedBlockPrefab, position, Quaternion.identity, mapContainer);
-            placedBlocks.Add(newBlock);
+            placedPlayerBlocks.Add(newBlock);
         }
         else
         {
@@ -247,22 +238,34 @@ public class LevelEditorController : MonoBehaviour
 
     // 選擇一個方塊類型並顯示預覽
     public void SelectBlock(int index)
+{
+    // 確保索引在範圍內，且未處於選取模式
+    if (index >= 0 && index < blockPrefabs.Length && !isSelectMode)
     {
-        if (index >= 0 && index < blockPrefabs.Length && isSelectMode == false)
+        // 清除當前的預覽方塊
+        if (previewBlock != null)
         {
-            if (previewBlock != null)
-            {
-                Destroy(previewBlock);
-            }
-
-            selectedBlockPrefab = blockPrefabs[index];
-            previewBlock = Instantiate(selectedBlockPrefab);
-            previewBlock.GetComponent<Collider2D>().enabled = false; // 關閉預覽方塊的碰撞
-            selectedBlock = null; // 取消選中的已放置方塊
-            isSelectMode = false; // 自動退出選取模式
-            selectModeButton.interactable = true; // 更新選取模式按鈕狀態
+            Destroy(previewBlock);
         }
+
+        // 選擇新的方塊並生成預覽
+        selectedBlockPrefab = blockPrefabs[index];
+        previewBlock = Instantiate(selectedBlockPrefab, mapContainer); // 將 mapContainer 設為父物件
+        previewBlock.GetComponent<Collider2D>().enabled = false; // 關閉碰撞
+
+        // 設定預覽方塊位置到鼠標位置
+        Vector3 mousePosition = GetMouseWorldPosition();
+        previewBlock.transform.position = SnapToGrid(mousePosition);
+
+        // 清除已選中的已放置方塊
+        selectedBlock = null;
+
+        // 自動退出選取模式並更新按鈕狀態
+        isSelectMode = false;
+        selectModeButton.interactable = true;
     }
+}
+
 
 
 
@@ -271,32 +274,44 @@ public class LevelEditorController : MonoBehaviour
     {
         MapData mapData = new MapData();
 
-        foreach (GameObject block in placedBlocks)
+        foreach (GameObject block in placedDefaultBlocks)
         {
-            BlockData blockData = new BlockData();
-            blockData.blockType = block.name.Replace("(Clone)", "");
-            blockData.position = block.transform.position;
-            blockData.position.z = 0; // 確保 z 軸為 0
-            blockData.rotation = block.transform.rotation.eulerAngles.z;
-            mapData.blocks.Add(blockData);
+            BlockData blockData = new BlockData
+            {
+                blockType = block.name.Replace("(Clone)", ""),
+                position = block.transform.position,
+                rotation = block.transform.rotation.eulerAngles.z,
+                isPlayerBlock = false
+            };
+            mapData.defaultBlocks.Add(blockData);
+        }
+
+        foreach (GameObject block in placedPlayerBlocks)
+        {
+            BlockData blockData = new BlockData
+            {
+                blockType = block.name.Replace("(Clone)", ""),
+                position = block.transform.position,
+                rotation = block.transform.rotation.eulerAngles.z,
+                isPlayerBlock = true
+            };
+            mapData.playerBlocks.Add(blockData);
         }
 
         currentMapData = mapData;
         string json = JsonUtility.ToJson(mapData, true);
-
-        // 使用 PlayerPrefs 存儲 JSON 字符串到 MapKey
         PlayerPrefs.SetString(MapKey, json);
         PlayerPrefs.Save();
         Debug.Log("Map saved to PlayerPrefs with key: " + MapKey);
     }
 
-    public void LoadMapFromPlayerPrefs()
+    void LoadMapFromPlayerPrefs()
     {
         if (PlayerPrefs.HasKey(MapKey))
         {
             string json = PlayerPrefs.GetString(MapKey);
-            MapData mapData = JsonUtility.FromJson<MapData>(json);
-            LoadMap(mapData);
+            currentMapData = JsonUtility.FromJson<MapData>(json);
+            LoadMap(currentMapData);
             Debug.Log("Map loaded from PlayerPrefs.");
         }
         else
@@ -304,18 +319,50 @@ public class LevelEditorController : MonoBehaviour
             Debug.LogWarning("No saved map data found in PlayerPrefs.");
         }
     }
-
-    public void LoadMap(MapData mapData)
+    void DarkenBlock(GameObject block, bool isDefaultBlock)
+{
+    var spriteRenderer = block.GetComponent<SpriteRenderer>();
+    if (spriteRenderer != null)
     {
-        ClearMap();
+        Color color = spriteRenderer.color;
+        
+        // 根據是否為玩家方塊來調整顏色
+        if (isDefaultBlock)
+        {
+            // 將 RGB 值調低，顏色變暗
+            color = new Color(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, color.a);
+        }
+        else
+        {
+            // 保持原色
+            color = new Color(color.r, color.g, color.b, color.a);
+        }
 
-        foreach (BlockData blockData in mapData.blocks)
+        spriteRenderer.color = color;
+    }
+}
+
+    void LoadMap(MapData mapData)
+    {
+        foreach (BlockData blockData in mapData.defaultBlocks)
         {
             GameObject prefab = FindBlockPrefab(blockData.blockType);
             if (prefab != null)
             {
                 GameObject newBlock = Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
-                placedBlocks.Add(newBlock);
+                placedDefaultBlocks.Add(newBlock);
+                DarkenBlock(newBlock, true); // 不顯示為玩家方塊
+            }
+        }
+
+        foreach (BlockData blockData in mapData.playerBlocks)
+        {
+            GameObject prefab = FindBlockPrefab(blockData.blockType);
+            if (prefab != null)
+            {
+                GameObject newBlock = Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
+                placedPlayerBlocks.Add(newBlock);
+                DarkenBlock(newBlock, false); // 顯示為玩家方塊
             }
         }
     }
@@ -337,29 +384,20 @@ public class LevelEditorController : MonoBehaviour
     private void ClearMap()
     {
         // 清空當前地圖中的所有方塊
-        foreach (GameObject block in placedBlocks)
+        foreach (GameObject block in placedPlayerBlocks)
         {
             Destroy(block);
         }
-        placedBlocks.Clear();
-    }
-
-    public void ResetMap()
-    {
-        currentMapData = null;
-        ClearMap();
-        LoadDefaultMap();
-    }
-
-    void LoadDefaultMap()
-    {
-        GameObject defaultBlock = Instantiate(blockPrefabs[0], new Vector3(0, 0, 0), Quaternion.identity, mapContainer);
-        initialBlocks.Add(defaultBlock);
+        placedPlayerBlocks.Clear();
     }
 
     public void StartGame()
     {
         SceneManager.LoadScene("Level1");
     }
-
+    private void OnApplicationQuit()
+    {
+        ClearMap();
+        SaveMap();
+    }
 }

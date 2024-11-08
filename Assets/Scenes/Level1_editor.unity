@@ -853,8 +853,6 @@ MonoBehaviour:
   startGameButton: {fileID: 497303723}
   clearButton: {fileID: 17059267}
   saveMapButton: {fileID: 2003330707}
-  loadMapButton: {fileID: 0}
-  resetMapButton: {fileID: 0}
   selectModeButton: {fileID: 453533003}
   darkOverlay: {fileID: 1284262111}
   rotationAngle: 90
@@ -1414,8 +1412,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1650811486}
+  - component: {fileID: 1650811487}
   m_Layer: 0
-  m_Name: Map
+  m_Name: MapDataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1436,6 +1435,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1650811487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650811485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e31145be38c77449b0c02fae785dfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1670974630
 GameObject:
   m_ObjectHideFlags: 0
