@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
 public class LevelEditorController : MonoBehaviour
 {
@@ -29,16 +30,14 @@ public class LevelEditorController : MonoBehaviour
 
     private const string MapKey = "MapData_Level1"; // 在 PlayerPrefs 中的鍵名
 
+
     void Start()
     {
-        startGameButton.onClick.AddListener(StartGame);
-        clearButton.onClick.AddListener(ClearMap);
-        saveMapButton.onClick.AddListener(SaveMap);
-        selectModeButton.onClick.AddListener(ToggleSelectMode);
+    
 
+        // 初始化地圖數據
         LoadMapFromPlayerPrefs();
 
-        // 隱藏暗色遮罩
         darkOverlay.SetActive(false);
     }
 
@@ -58,27 +57,28 @@ public class LevelEditorController : MonoBehaviour
     }
 
     // 切換選取模式
-   public void ToggleSelectMode()
-{
-    isSelectMode = !isSelectMode;
-    
-    if (isSelectMode)
+    public void ToggleSelectMode()
     {
-        // 進入選取模式，顯示暗色遮罩
-        darkOverlay.SetActive(true);
-        selectedBlockPrefab = null;
-        if (previewBlock != null)
+        Debug.Log("換。");
+        isSelectMode = !isSelectMode;
+    
+        if (isSelectMode)
         {
-            Destroy(previewBlock); // 清除預覽方塊
+        // 進入選取模式，顯示暗色遮罩
+            darkOverlay.SetActive(true);
+            selectedBlockPrefab = null;
+            if (previewBlock != null)
+            {   
+                Destroy(previewBlock); // 清除預覽方塊
+            }
+        }
+        else
+        {
+            // 退出選取模式，隱藏暗色遮罩並取消選中
+            darkOverlay.SetActive(false);
+            DeselectBlock();
         }
     }
-    else
-    {
-        // 退出選取模式，隱藏暗色遮罩並取消選中
-        darkOverlay.SetActive(false);
-        DeselectBlock();
-    }
-}
 
     // 處理選取模式下的方塊選取
     void HandleBlockSelection()
@@ -260,9 +260,6 @@ public class LevelEditorController : MonoBehaviour
         // 清除已選中的已放置方塊
         selectedBlock = null;
 
-        // 自動退出選取模式並更新按鈕狀態
-        isSelectMode = false;
-        selectModeButton.interactable = true;
     }
 }
 
@@ -342,27 +339,31 @@ public class LevelEditorController : MonoBehaviour
     }
 }
 
-    void LoadMap(MapData mapData)
+
+    public void LoadMap(MapData mapData)
     {
+
+        // 加載預設方塊
         foreach (BlockData blockData in mapData.defaultBlocks)
         {
             GameObject prefab = FindBlockPrefab(blockData.blockType);
             if (prefab != null)
             {
-                GameObject newBlock = Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
-                placedDefaultBlocks.Add(newBlock);
-                DarkenBlock(newBlock, true); // 不顯示為玩家方塊
+                GameObject newBlock = Instantiate(prefab, blockData.position, Quaternion.identity, mapContainer);
+                newBlock.transform.position = blockData.position;
+                newBlock.transform.rotation = Quaternion.Euler(0, 0, blockData.rotation);
             }
         }
 
+        // 加載玩家方塊
         foreach (BlockData blockData in mapData.playerBlocks)
         {
             GameObject prefab = FindBlockPrefab(blockData.blockType);
             if (prefab != null)
             {
-                GameObject newBlock = Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
+                GameObject newBlock = Instantiate(prefab, blockData.position, Quaternion.identity, mapContainer);
                 placedPlayerBlocks.Add(newBlock);
-                DarkenBlock(newBlock, false); // 顯示為玩家方塊
+                newBlock.transform.rotation = Quaternion.Euler(0, 0, blockData.rotation);
             }
         }
     }
@@ -401,3 +402,4 @@ public class LevelEditorController : MonoBehaviour
         SaveMap();
     }
 }
+
