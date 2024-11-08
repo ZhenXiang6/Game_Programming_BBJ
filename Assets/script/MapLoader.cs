@@ -1,25 +1,27 @@
-using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MapLoader : MonoBehaviour
 {
-    public GameObject[] blockPrefabs; // 各類型方塊的預置物
-    public Transform mapContainer;     // 存放方塊的容器
+    private const string MapKey = "MapData_Level1"; // 與 LevelEditorController 中使用的鍵保持一致
+    public GameObject[] blockPrefabs;              // 各種類型的方塊預置物
+    public Transform mapContainer;                 // 地圖方塊的父容器
 
     void Start()
     {
-        LoadMap();
+        LoadMapFromPlayerPrefs();
     }
 
-    public void LoadMap()
+    // 從 PlayerPrefs 加載地圖並生成方塊
+    public void LoadMapFromPlayerPrefs()
     {
-        string path = Application.persistentDataPath + "/mapData_level1.json";
-        if (File.Exists(path))
+        if (PlayerPrefs.HasKey(MapKey))
         {
-            string json = File.ReadAllText(path);
+            // 從 PlayerPrefs 讀取 JSON 字符串並解析
+            string json = PlayerPrefs.GetString(MapKey);
             MapData mapData = JsonUtility.FromJson<MapData>(json);
 
+            // 根據地圖數據生成方塊
             foreach (BlockData blockData in mapData.blocks)
             {
                 GameObject prefab = FindBlockPrefab(blockData.blockType);
@@ -28,14 +30,15 @@ public class MapLoader : MonoBehaviour
                     Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
                 }
             }
-            Debug.Log("Map loaded from " + path);
+            Debug.Log("Map loaded from PlayerPrefs.");
         }
         else
         {
-            Debug.LogWarning("No saved map data found at " + path);
+            Debug.LogWarning("No map data found in PlayerPrefs.");
         }
     }
 
+    // 根據方塊類型找到對應的預置物
     private GameObject FindBlockPrefab(string blockType)
     {
         foreach (GameObject prefab in blockPrefabs)
@@ -45,6 +48,7 @@ public class MapLoader : MonoBehaviour
                 return prefab;
             }
         }
+        Debug.LogWarning("Prefab not found for block type: " + blockType);
         return null;
     }
 }

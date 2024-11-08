@@ -29,12 +29,13 @@ public class LevelEditorController : MonoBehaviour
     private List<GameObject> placedBlocks = new List<GameObject>();
     private List<GameObject> initialBlocks = new List<GameObject>();
 
+    private const string MapKey = "MapData_Level1"; // 在 PlayerPrefs 中的鍵名
+
     void Start()
     {
         startGameButton.onClick.AddListener(StartGame);
         clearButton.onClick.AddListener(ClearMap);
         saveMapButton.onClick.AddListener(SaveMap);
-        loadMapButton.onClick.AddListener(LoadMap);
         resetMapButton.onClick.AddListener(ResetMap);
         selectModeButton.onClick.AddListener(ToggleSelectMode);
 
@@ -277,14 +278,33 @@ public class LevelEditorController : MonoBehaviour
             BlockData blockData = new BlockData();
             blockData.blockType = block.name.Replace("(Clone)", "");
             blockData.position = block.transform.position;
+            blockData.position.z = 0; // 確保 z 軸為 0
             blockData.rotation = block.transform.rotation.eulerAngles.z;
             mapData.blocks.Add(blockData);
         }
 
         currentMapData = mapData;
         string json = JsonUtility.ToJson(mapData, true);
-        File.WriteAllText(Application.persistentDataPath + "/mapData_level1.json", json);
-        Debug.Log("Map saved to " + Application.persistentDataPath + "/mapData_level1.json");
+
+        // 使用 PlayerPrefs 存儲 JSON 字符串到 MapKey
+        PlayerPrefs.SetString(MapKey, json);
+        PlayerPrefs.Save();
+        Debug.Log("Map saved to PlayerPrefs with key: " + MapKey);
+    }
+
+    public void LoadMapFromPlayerPrefs()
+    {
+        if (PlayerPrefs.HasKey(MapKey))
+        {
+            string json = PlayerPrefs.GetString(MapKey);
+            MapData mapData = JsonUtility.FromJson<MapData>(json);
+            LoadMap(mapData);
+            Debug.Log("Map loaded from PlayerPrefs.");
+        }
+        else
+        {
+            Debug.LogWarning("No saved map data found in PlayerPrefs.");
+        }
     }
 
     public void LoadMap(MapData mapData)
@@ -302,24 +322,23 @@ public class LevelEditorController : MonoBehaviour
         }
     }
 
-    public void LoadMap()
+    private GameObject FindBlockPrefab(string blockType)
     {
-        string path = Application.persistentDataPath + "/mapData_level1.json";
-        if (File.Exists(path))
+        // 根據 blockType 找到對應的預置物
+        // 假設 blockPrefabs 是所有方塊預置物的數組
+        foreach (GameObject prefab in blockPrefabs)
         {
-            string json = File.ReadAllText(path);
-            MapData mapData = JsonUtility.FromJson<MapData>(json);
-            LoadMap(mapData);
-            Debug.Log("Map loaded from " + path);
+            if (prefab.name == blockType)
+            {
+                return prefab;
+            }
         }
-        else
-        {
-            Debug.LogWarning("No saved map data found at " + path);
-        }
+        return null;
     }
 
-    public void ClearMap()
+    private void ClearMap()
     {
+        // 清空當前地圖中的所有方塊
         foreach (GameObject block in placedBlocks)
         {
             Destroy(block);
@@ -345,15 +364,4 @@ public class LevelEditorController : MonoBehaviour
         SceneManager.LoadScene("Level1");
     }
 
-    GameObject FindBlockPrefab(string blockType)
-    {
-        foreach (GameObject prefab in blockPrefabs)
-        {
-            if (prefab.name == blockType)
-            {
-                return prefab;
-            }
-        }
-        return null;
-    }
 }
