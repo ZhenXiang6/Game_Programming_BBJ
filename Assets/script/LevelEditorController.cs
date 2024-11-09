@@ -33,7 +33,7 @@ public class LevelEditorController : MonoBehaviour
 
     void Start()
     {
-    
+
 
         // 初始化地圖數據
         LoadMapFromPlayerPrefs();
@@ -125,9 +125,9 @@ public class LevelEditorController : MonoBehaviour
         if (Input.GetMouseButton(0)) // 按住左鍵拖動方塊
         {
             // 使用 OverlapCircle 檢查目標位置是否已有方塊
-            float checkRadius = gridSpacing / 2f;
+            float checkRadius = gridSpacing / 2f * 0.9f;
             Collider2D overlap = Physics2D.OverlapCircle(targetPosition, checkRadius);
-
+ 
             // 如果重疊對象為空或者為當前選中方塊本身，則允許移動
             if (overlap == null || overlap.gameObject == selectedBlock)
             {
@@ -201,7 +201,7 @@ public class LevelEditorController : MonoBehaviour
         position.z = 0;
         
         // 使用 OverlapCircle 檢查位置附近是否已有方塊
-        float checkRadius = gridSpacing / 2f;
+        float checkRadius = gridSpacing / 2f * 0.9f;
         Collider2D overlap = Physics2D.OverlapCircle(position, checkRadius);
 
         if (overlap == null)
