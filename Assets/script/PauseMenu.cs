@@ -1,30 +1,26 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
 
-    public GameObject pauseMenuUI; // Reference to the pause menu UI
-    public GameObject bagPanel; // Reference to the Bag panel
-    public GameObject endMenuUI;
+    public GameObject pauseMenuUI;
+    public GameObject confirmationPanel; // 確認視窗
+    public string mainMenuSceneName = "MainMenu"; // 主選單場景名稱
+    public string editorSceneName = "EditorScene"; // 編輯器場景名稱
 
     void Update()
     {
+        // 按下 Escape 鍵時切換暫停/繼續狀態
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (endMenuUI == null){
-                if (GameIsPaused)
-                {
-                    Resume();
-                }
-                else
-                {
-                    Pause();
-                }
+            // 如果確認視窗顯示中，則隱藏確認視窗
+            if (confirmationPanel.activeSelf)
+            {
+                CancelMainMenu();
             }
-            else if(endMenuUI.activeSelf == false)
+            else
             {
                 if (GameIsPaused)
                 {
@@ -35,30 +31,58 @@ public class PauseMenu : MonoBehaviour
                     Pause();
                 }
             }
-
         }
     }
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false); // Hide the pause menu UI
-        bagPanel.SetActive(false); // Hide the Bag panel
-        Time.timeScale = 1f; // Resume the game
-        GameIsPaused = false; // Set the paused state to false
+        // 繼續遊戲
+        pauseMenuUI.SetActive(false);
+        confirmationPanel.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
     }
 
     void Pause()
     {
-        pauseMenuUI.SetActive(true); // Show the pause menu UI
-        bagPanel.SetActive(false); // Ensure the Bag panel is inactive when pausing
-        Time.timeScale = 0f; // Pause the game
-        GameIsPaused = true; // Set the paused state to true
+        // 暫停遊戲
+        pauseMenuUI.SetActive(true);
+        confirmationPanel.SetActive(false); // 確認視窗默認為隱藏
+        Time.timeScale = 0f;
+        GameIsPaused = true;
     }
 
-    public void LoadMenu()
+    public void ReloadLevel()
     {
-        Debug.Log("Loading Menu....");
-        Resume(); // Resume the game before loading the menu
-        SceneManager.LoadScene("Main"); // Load the main menu scene
+        Debug.Log("Reloading current level...");
+        Resume();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadEditorScene()
+    {
+        Debug.Log("Loading Editor Scene...");
+        Resume();
+        SceneManager.LoadScene(editorSceneName);
+    }
+
+    public void ShowConfirmationPanel()
+    {
+        // 顯示確認視窗，隱藏暫停菜單的其他部分
+        confirmationPanel.SetActive(true);
+    }
+
+    public void ConfirmMainMenu()
+    {
+        // 確認返回主選單
+        Debug.Log("Returning to Main Menu: " + mainMenuSceneName);
+        Resume();
+        SceneManager.LoadScene(mainMenuSceneName);
+    }
+
+    public void CancelMainMenu()
+    {
+        // 取消返回主選單，隱藏確認視窗
+        confirmationPanel.SetActive(false);
     }
 }

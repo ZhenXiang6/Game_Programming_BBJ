@@ -5,7 +5,10 @@ using UnityEngine.SceneManagement;
 public class EndMenu : MonoBehaviour
 {
     public GameObject endMenuUI; // Reference to the end menu UI
-
+     void Start()
+    {
+        endMenuUI.SetActive(false);
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the colliding object is the player
