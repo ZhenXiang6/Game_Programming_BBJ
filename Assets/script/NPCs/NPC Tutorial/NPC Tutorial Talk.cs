@@ -16,6 +16,8 @@ public class NPCTutorialTalk : MonoBehaviour
     public GameObject NPC;
     public PlayerController playerController;
 
+    public AudioSource audioSource;
+
     void Start()
     {
         isTalking = false;
@@ -39,6 +41,7 @@ public class NPCTutorialTalk : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && !isTalking)
             {
                 isTalking = true;
+                audioSource.Play(0);
                 StopMove();
                 StartDialogue();
             }
@@ -68,6 +71,7 @@ public class NPCTutorialTalk : MonoBehaviour
         // Handle input for dialogue progression
         if (isTalking && Input.GetKeyDown(KeyCode.E))
         {
+            audioSource.Play(0);
             flowerSys.Next(); // Continue dialogue
         }
     }
