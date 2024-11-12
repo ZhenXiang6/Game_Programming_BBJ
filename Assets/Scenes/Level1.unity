@@ -2604,7 +2604,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 2
   m_Size: {x: 38.399998, y: 21.599998}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -3150,6 +3150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6227867e92563814da128c282ff240ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedLevel: Level1
+  availableLevels:
+  - Level1
+  - Level2
+  - Level3
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}
