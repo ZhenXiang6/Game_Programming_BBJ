@@ -3,7 +3,13 @@ using UnityEngine;
 
 public class MapLoader : MonoBehaviour
 {
-    private const string MapKey = "MapData_Level1"; // 與 LevelEditorController 中使用的鍵保持一致
+    [Header("Level Settings")]
+    [Tooltip("選擇當前關卡")]
+    public string selectedLevel;  // 選擇的關卡名稱
+
+    [Tooltip("可用的關卡列表")]
+    public List<string> availableLevels = new List<string> { "Level1", "Level2", "Level3" }; // 預定義的關卡列表
+
     public GameObject[] blockPrefabs;              // 各種類型的方塊預置物
     public Transform mapContainer;                 // 地圖方塊的父容器
 
@@ -15,21 +21,13 @@ public class MapLoader : MonoBehaviour
     // 從 PlayerPrefs 加載地圖並生成方塊
     public void LoadMapFromPlayerPrefs()
     {
-        if (PlayerPrefs.HasKey(MapKey))
+        if (PlayerPrefs.HasKey(selectedLevel))
         {
             // 從 PlayerPrefs 讀取 JSON 字符串並解析
-            string json = PlayerPrefs.GetString(MapKey);
+            string json = PlayerPrefs.GetString(selectedLevel, null);
             MapData mapData = JsonUtility.FromJson<MapData>(json);
 
             // 根據地圖數據生成方塊
-            foreach (BlockData blockData in mapData.defaultBlocks)
-            {
-                GameObject prefab = FindBlockPrefab(blockData.blockType);
-                if (prefab != null)
-                {
-                    Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
-                }
-            }
             foreach (BlockData blockData in mapData.playerBlocks)
             {
                 GameObject prefab = FindBlockPrefab(blockData.blockType);

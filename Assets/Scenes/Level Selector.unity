@@ -1465,8 +1465,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 662732295}
-  bagPanel: {fileID: 324017867}
-  endMenuUI: {fileID: 0}
+  confirmationPanel: {fileID: 0}
+  mainMenuSceneName: MainMenu
+  editorSceneName: EditorScene
 --- !u!1 &696642192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,8 +1793,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 662732295}
-  bagPanel: {fileID: 324017867}
-  endMenuUI: {fileID: 0}
+  confirmationPanel: {fileID: 0}
+  mainMenuSceneName: MainMenu
+  editorSceneName: EditorScene
 --- !u!1 &767554381
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,7 +2291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc7ef60915818040be220193fde7a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSceneName: Level1
+  targetSceneName: Level2_editor
   pressEText: {fileID: 1227606370}
 --- !u!61 &770674932
 BoxCollider2D:
