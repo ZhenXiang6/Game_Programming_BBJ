@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
     private float dashTimeLeft;
     private float lastDashTime = -100f;   // 初始化为足够小的值
 
+    [Header("Audio Source")]
+    public AudioSource jumpFX;
+
     void Start()
     {
         blockBuilder = GetComponent<BlockBuilder>();
@@ -79,8 +82,9 @@ public class PlayerController : MonoBehaviour
 
     void HandleJump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded && PlayerCanMove && !isDashing)
+        if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)) && isGrounded && PlayerCanMove && !isDashing)
         {
+            jumpFX.Play(0);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             if (anim != null)
             {
