@@ -14,6 +14,7 @@ public class LevelEditorController : MonoBehaviour
     public Button startGameButton;
     public Button clearButton;
     public Button saveMapButton;
+    public Button saveDefaultMapButton;
     public Button selectModeButton;
     public GameObject darkOverlay;          // 暗色遮罩
     public int rotationAngle = 90;
@@ -27,12 +28,9 @@ public class LevelEditorController : MonoBehaviour
     private List<GameObject> placedPlayerBlocks = new List<GameObject>(); // 僅玩家方塊
     private List<GameObject> placedDefaultBlocks = new List<GameObject>(); // 僅預設方塊
 
-    private const string MapKey = "MapData_Level1"; // 在 PlayerPrefs 中的鍵名
-
+    public string MapKey = "MapData_Level1"; // 在 PlayerPrefs 中的鍵名
     void Start()
     {
-        
-
         LoadMapFromPlayerPrefs();
 
         // 隱藏暗色遮罩
@@ -263,7 +261,28 @@ public class LevelEditorController : MonoBehaviour
     }
 }
 
+    void  DarkenBlock(GameObject block, bool isDefaultBlock)
+    {
+        var spriteRenderer = block.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            Color color = spriteRenderer.color;
+            
+            // 根據是否為玩家方塊來調整顏色
+            if (isDefaultBlock)
+            {
+                // 將 RGB 值調低，顏色變暗
+                color = new Color(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, color.a);
+            }
+            else
+            {
+                // 保持原色
+                color = new Color(color.r, color.g, color.b, color.a);
+            }
 
+            spriteRenderer.color = color;
+        }
+    }
 
 
     // 儲存、載入、清除等其他功能
@@ -278,7 +297,7 @@ public class LevelEditorController : MonoBehaviour
                 blockType = block.name.Replace("(Clone)", ""),
                 position = block.transform.position,
                 rotation = block.transform.rotation.eulerAngles.z,
-                isPlayerBlock = false
+                isPlayerBlock = true
             };
             mapData.defaultBlocks.Add(blockData);
         }
@@ -316,28 +335,7 @@ public class LevelEditorController : MonoBehaviour
             Debug.LogWarning("No saved map data found in PlayerPrefs.");
         }
     }
-    void DarkenBlock(GameObject block, bool isDefaultBlock)
-{
-    var spriteRenderer = block.GetComponent<SpriteRenderer>();
-    if (spriteRenderer != null)
-    {
-        Color color = spriteRenderer.color;
-        
-        // 根據是否為玩家方塊來調整顏色
-        if (isDefaultBlock)
-        {
-            // 將 RGB 值調低，顏色變暗
-            color = new Color(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, color.a);
-        }
-        else
-        {
-            // 保持原色
-            color = new Color(color.r, color.g, color.b, color.a);
-        }
-
-        spriteRenderer.color = color;
-    }
-}
+    
 
     void LoadMap(MapData mapData)
     {
@@ -397,5 +395,42 @@ public class LevelEditorController : MonoBehaviour
         ClearMap();
         SaveMap();
     }
+
+    public void SaveAsDefault()
+    {
+        // Create a new MapData instance to store default blocks
+        MapData defaultMapData = new MapData();
+
+        foreach (GameObject block in placedDefaultBlocks)
+        {
+            BlockData blockData = new BlockData
+            {
+                blockType = block.name.Replace("(Clone)", ""),
+                position = block.transform.position,
+                rotation = block.transform.rotation.eulerAngles.z,
+                isPlayerBlock = true
+            };
+            defaultMapData.defaultBlocks.Add(blockData);
+        }
+
+        foreach (GameObject block in placedPlayerBlocks)
+        {
+            BlockData blockData = new BlockData
+            {
+                blockType = block.name.Replace("(Clone)", ""),
+                position = block.transform.position,
+                rotation = block.transform.rotation.eulerAngles.z,
+                isPlayerBlock = true
+            };
+            defaultMapData.defaultBlocks.Add(blockData);
+        }
+
+        currentMapData = defaultMapData;
+        string json = JsonUtility.ToJson(defaultMapData, true);
+        PlayerPrefs.SetString(MapKey, json);
+        PlayerPrefs.Save();
+        Debug.Log("Default map saved successfully.");
+    }
+
 }
 

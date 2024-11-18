@@ -3,7 +3,9 @@
 public class PlayerController : MonoBehaviour
 {
     [Header("移动参数")]
+    public float base_speed = 5f;
     public float speed = 5f;
+    public float default_jumpForce = 10f;
     public float jumpForce = 10f;
 
     [Header("地面检测")]
@@ -32,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
     private float dashTimeLeft;
     private float lastDashTime = -100f;   // 初始化为足够小的值
+
 
     void Start()
     {
@@ -216,5 +219,14 @@ public class PlayerController : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
         }
+    }
+    
+    public void SetJumpForce(float new_jumpForce) { // if input is -1, means to reset the jump force
+        if (new_jumpForce == -1f) {
+            jumpForce = default_jumpForce;
+            return;
+        } 
+
+        jumpForce = new_jumpForce;
     }
 }
