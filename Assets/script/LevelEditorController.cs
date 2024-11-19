@@ -290,17 +290,7 @@ public class LevelEditorController : MonoBehaviour
     {
         MapData mapData = new MapData();
 
-        foreach (GameObject block in placedDefaultBlocks)
-        {
-            BlockData blockData = new BlockData
-            {
-                blockType = block.name.Replace("(Clone)", ""),
-                position = block.transform.position,
-                rotation = block.transform.rotation.eulerAngles.z,
-                isPlayerBlock = true
-            };
-            mapData.defaultBlocks.Add(blockData);
-        }
+        
 
         foreach (GameObject block in placedPlayerBlocks)
         {
@@ -309,7 +299,7 @@ public class LevelEditorController : MonoBehaviour
                 blockType = block.name.Replace("(Clone)", ""),
                 position = block.transform.position,
                 rotation = block.transform.rotation.eulerAngles.z,
-                isPlayerBlock = true
+                
             };
             mapData.playerBlocks.Add(blockData);
         }
@@ -339,17 +329,7 @@ public class LevelEditorController : MonoBehaviour
 
     void LoadMap(MapData mapData)
     {
-        foreach (BlockData blockData in mapData.defaultBlocks)
-        {
-            GameObject prefab = FindBlockPrefab(blockData.blockType);
-            if (prefab != null)
-            {
-                GameObject newBlock = Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
-                placedDefaultBlocks.Add(newBlock);
-                DarkenBlock(newBlock, true); // 不顯示為玩家方塊
-            }
-        }
-
+        
         foreach (BlockData blockData in mapData.playerBlocks)
         {
             GameObject prefab = FindBlockPrefab(blockData.blockType);
@@ -401,29 +381,9 @@ public class LevelEditorController : MonoBehaviour
         // Create a new MapData instance to store default blocks
         MapData defaultMapData = new MapData();
 
-        foreach (GameObject block in placedDefaultBlocks)
-        {
-            BlockData blockData = new BlockData
-            {
-                blockType = block.name.Replace("(Clone)", ""),
-                position = block.transform.position,
-                rotation = block.transform.rotation.eulerAngles.z,
-                isPlayerBlock = true
-            };
-            defaultMapData.defaultBlocks.Add(blockData);
-        }
+        
 
-        foreach (GameObject block in placedPlayerBlocks)
-        {
-            BlockData blockData = new BlockData
-            {
-                blockType = block.name.Replace("(Clone)", ""),
-                position = block.transform.position,
-                rotation = block.transform.rotation.eulerAngles.z,
-                isPlayerBlock = true
-            };
-            defaultMapData.defaultBlocks.Add(blockData);
-        }
+        
 
         currentMapData = defaultMapData;
         string json = JsonUtility.ToJson(defaultMapData, true);
