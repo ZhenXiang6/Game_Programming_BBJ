@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 827252034125282475}
   - component: {fileID: 3334188273914085337}
   - component: {fileID: -1313258094560013637}
+  - component: {fileID: -6488773449814949110}
   m_Layer: 8
   m_Name: Blinking Block
   m_TagString: Ground
@@ -146,3 +147,30 @@ MonoBehaviour:
   start_blinking_time: 4
   blinking_interval: 1
   acc_time: 0
+--- !u!50 &-6488773449814949110
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233273028531904866}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

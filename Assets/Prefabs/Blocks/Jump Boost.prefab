@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 827252034125282475}
   - component: {fileID: 3334188273914085337}
   - component: {fileID: 8608081839734395556}
+  - component: {fileID: -2411352504804043120}
   m_Layer: 8
   m_Name: Jump Boost
   m_TagString: Ground
@@ -145,3 +146,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boostedJumpForce: 20
   left_timer: 0
+--- !u!50 &-2411352504804043120
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233273028531904866}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
