@@ -349,6 +349,7 @@ public class LevelEditorController : MonoBehaviour
 
     public void StartGame()
     {
+        SaveMap();
         SceneManager.LoadScene(selectedLevel);
     }
     private void OnApplicationQuit()
