@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Audio Source")]
     public AudioSource jumpFX;
+    public AudioSource deathFX;
+    public AudioSource dashFX;
 
     void Start()
     {
@@ -154,6 +156,7 @@ public class PlayerController : MonoBehaviour
 
     void StartDash()
     {
+        dashFX.Play();
         isDashing = true;
         dashTimeLeft = dashDuration;
         lastDashTime = Time.time;
@@ -205,6 +208,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = spawnPosition;
         rb.velocity = Vector2.zero; // 重置速度
+        deathFX.Play();
         Debug.Log("Player respawned to the original position.");
 
         if (blockBuilder != null)
