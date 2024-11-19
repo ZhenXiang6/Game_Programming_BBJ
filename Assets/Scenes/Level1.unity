@@ -2347,6 +2347,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1042932302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1042932303}
+  m_Layer: 0
+  m_Name: LevelEntered
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1042932303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042932302}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 341.15192, y: 381.31284, z: -7.415174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1071596764 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 3334188273914085337, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
@@ -3158,6 +3189,9 @@ MonoBehaviour:
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}
+  - {fileID: 6233273028531904866, guid: 1f1998dc87ed8074da0c3144d3b64584, type: 3}
+  - {fileID: 6233273028531904866, guid: 07017ee31d0269d47b51542b69821a92, type: 3}
+  - {fileID: 6233273028531904866, guid: 12a64830d2cf3fa4598fbaddcb89fc35, type: 3}
   mapContainer: {fileID: 563973732}
 --- !u!4 &1651190319
 Transform:
@@ -4020,7 +4054,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db1a694ad7cebc345a51c863148a8a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  base_speed: 5
   speed: 6
+  default_jumpForce: 10
   jumpForce: 7
   groundCheck: {fileID: 469701868}
   checkRadius: 0.1
@@ -4028,6 +4064,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   anim: {fileID: 0}
+  dashSpeed: 20
+  dashDuration: 0.2
+  dashCooldown: 1
   PlayerCanMove: 1
 --- !u!95 &1945100935
 Animator:
@@ -5722,3 +5761,4 @@ SceneRoots:
   - {fileID: 155749429}
   - {fileID: 1002550668}
   - {fileID: 1717667679}
+  - {fileID: 1042932303}
