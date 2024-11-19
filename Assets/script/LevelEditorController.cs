@@ -7,6 +7,13 @@ using UnityEngine.EventSystems;
 
 public class LevelEditorController : MonoBehaviour
 {
+    [Header("Level Settings")]
+    [Tooltip("選擇當前關卡")]
+    public string selectedLevel;  // 選擇的關卡名稱
+
+    [Tooltip("可用的關卡列表")]
+    public List<string> availableLevels = new List<string> { "Level1", "Level2", "Level3" }; // 預定義的關卡列表
+
     public static MapData currentMapData;
 
     public GameObject[] blockPrefabs;
@@ -26,11 +33,12 @@ public class LevelEditorController : MonoBehaviour
     private GameObject selectedBlockPrefab;
     private GameObject selectedBlock;
     private List<GameObject> placedPlayerBlocks = new List<GameObject>(); // 僅玩家方塊
-    private List<GameObject> placedDefaultBlocks = new List<GameObject>(); // 僅預設方塊
 
-    public string MapKey = "MapData_Level1"; // 在 PlayerPrefs 中的鍵名
+
+
     void Start()
     {
+        
         LoadMapFromPlayerPrefs();
 
         // 隱藏暗色遮罩
@@ -288,19 +296,8 @@ public class LevelEditorController : MonoBehaviour
     // 儲存、載入、清除等其他功能
     public void SaveMap()
     {
+        string MapKey = selectedLevel;
         MapData mapData = new MapData();
-
-        foreach (GameObject block in placedDefaultBlocks)
-        {
-            BlockData blockData = new BlockData
-            {
-                blockType = block.name.Replace("(Clone)", ""),
-                position = block.transform.position,
-                rotation = block.transform.rotation.eulerAngles.z,
-                isPlayerBlock = true
-            };
-            mapData.defaultBlocks.Add(blockData);
-        }
 
         foreach (GameObject block in placedPlayerBlocks)
         {
@@ -309,7 +306,6 @@ public class LevelEditorController : MonoBehaviour
                 blockType = block.name.Replace("(Clone)", ""),
                 position = block.transform.position,
                 rotation = block.transform.rotation.eulerAngles.z,
-                isPlayerBlock = true
             };
             mapData.playerBlocks.Add(blockData);
         }
@@ -321,11 +317,12 @@ public class LevelEditorController : MonoBehaviour
         Debug.Log("Map saved to PlayerPrefs with key: " + MapKey);
     }
 
-    void LoadMapFromPlayerPrefs()
+    public void LoadMapFromPlayerPrefs()
     {
+        string MapKey = selectedLevel;
         if (PlayerPrefs.HasKey(MapKey))
         {
-            string json = PlayerPrefs.GetString(MapKey);
+            string json = PlayerPrefs.GetString(MapKey, null);
             currentMapData = JsonUtility.FromJson<MapData>(json);
             LoadMap(currentMapData);
             Debug.Log("Map loaded from PlayerPrefs.");
@@ -335,21 +332,10 @@ public class LevelEditorController : MonoBehaviour
             Debug.LogWarning("No saved map data found in PlayerPrefs.");
         }
     }
-    
+
 
     void LoadMap(MapData mapData)
     {
-        foreach (BlockData blockData in mapData.defaultBlocks)
-        {
-            GameObject prefab = FindBlockPrefab(blockData.blockType);
-            if (prefab != null)
-            {
-                GameObject newBlock = Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
-                placedDefaultBlocks.Add(newBlock);
-                DarkenBlock(newBlock, true); // 不顯示為玩家方塊
-            }
-        }
-
         foreach (BlockData blockData in mapData.playerBlocks)
         {
             GameObject prefab = FindBlockPrefab(blockData.blockType);
@@ -357,7 +343,6 @@ public class LevelEditorController : MonoBehaviour
             {
                 GameObject newBlock = Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
                 placedPlayerBlocks.Add(newBlock);
-                DarkenBlock(newBlock, false); // 顯示為玩家方塊
             }
         }
     }
@@ -388,7 +373,7 @@ public class LevelEditorController : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene(selectedLevel);
     }
     private void OnApplicationQuit()
     {

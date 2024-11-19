@@ -4242,6 +4242,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6227867e92563814da128c282ff240ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+
+  selectedLevel: Level2
+  availableLevels:
+  - Level1
+  - Level2
+  - Level3
+
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}
@@ -5031,7 +5038,9 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945100929}
+
   m_BodyType: 1
+
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -5062,9 +5071,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db1a694ad7cebc345a51c863148a8a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+
   base_speed: 5
   speed: 6
   default_jumpForce: 10
+
   jumpForce: 7
   groundCheck: {fileID: 469701868}
   checkRadius: 0.1
@@ -5072,9 +5083,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   anim: {fileID: 0}
+
   dashSpeed: 20
   dashDuration: 0.2
   dashCooldown: 1
+
   PlayerCanMove: 1
 --- !u!95 &1945100935
 Animator:

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public Vector3 CameraDefaultPos;
     public float zoomSpeed = 2f;          // 滾輪縮放速度
     public float minZoom = 5f;            // 最小縮放值
     public float maxZoom = 20f;           // 最大縮放值
@@ -9,6 +10,7 @@ public class CameraController : MonoBehaviour
     public GameObject Background;
     
     private Vector2 mapBounds;            // 地圖邊界大小
+    private Vector3 backgroundCenter;     // 背景中心位置
     private Camera mainCamera;
     private Vector3 dragOrigin;           // 拖動起始位置
 
@@ -26,6 +28,9 @@ public class CameraController : MonoBehaviour
                 backgroundRenderer.bounds.size.y / 2
             );
 
+            // 獲取背景的中心位置
+            backgroundCenter = Background.transform.position;
+
             // 將攝影機定位到背景的中心
             PositionCameraToCenter();
         }
@@ -37,16 +42,13 @@ public class CameraController : MonoBehaviour
 
     private void PositionCameraToCenter()
     {
-        // 計算背景的中心點
-        Vector3 backgroundCenter = Background.transform.position;
-
         // 計算攝影機的視野範圍
         float cameraHeight = mainCamera.orthographicSize;
         float cameraWidth = cameraHeight * mainCamera.aspect;
 
         // 確保攝影機的視野完全位於背景內
-        float xPosition = Mathf.Clamp(backgroundCenter.x, -mapBounds.x + cameraWidth, mapBounds.x - cameraWidth);
-        float yPosition = Mathf.Clamp(backgroundCenter.y, -mapBounds.y + cameraHeight, mapBounds.y - cameraHeight);
+        float xPosition = Mathf.Clamp(backgroundCenter.x, backgroundCenter.x - mapBounds.x + cameraWidth, backgroundCenter.x + mapBounds.x - cameraWidth);
+        float yPosition = Mathf.Clamp(backgroundCenter.y, backgroundCenter.y - mapBounds.y + cameraHeight, backgroundCenter.y + mapBounds.y - cameraHeight);
 
         // 設定攝影機位置
         mainCamera.transform.position = new Vector3(xPosition, yPosition, mainCamera.transform.position.z);
@@ -97,10 +99,11 @@ public class CameraController : MonoBehaviour
 
         Vector3 position = mainCamera.transform.position;
 
-        float minX = -mapBounds.x + cameraWidth;
-        float maxX = mapBounds.x - cameraWidth;
-        float minY = -mapBounds.y + cameraHeight;
-        float maxY = mapBounds.y - cameraHeight;
+        // 基於背景中心點計算邊界限制
+        float minX = backgroundCenter.x - mapBounds.x + cameraWidth;
+        float maxX = backgroundCenter.x + mapBounds.x - cameraWidth;
+        float minY = backgroundCenter.y - mapBounds.y + cameraHeight;
+        float maxY = backgroundCenter.y + mapBounds.y - cameraHeight;
 
         position.x = Mathf.Clamp(position.x, minX, maxX);
         position.y = Mathf.Clamp(position.y, minY, maxY);

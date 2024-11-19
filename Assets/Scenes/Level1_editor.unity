@@ -1762,9 +1762,11 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
-  m_Origin: {x: -105, y: -8, z: 0}
-  m_Size: {x: 119, y: 14, z: 1}
+
+  m_Color: {r: 0.16470589, g: 0.16470589, b: 0.16470589, a: 1}
+  m_Origin: {x: -105, y: -6, z: 0}
+  m_Size: {x: 111, y: 12, z: 1}
+
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -2387,7 +2389,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Level1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &568610793
@@ -2776,6 +2778,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cfe84db596fd24ebe277e192b0cbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedLevel: Level1
+  availableLevels:
+  - Level1
+  - Level2
+  - Level3
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}
@@ -3328,7 +3335,7 @@ Transform:
   m_GameObject: {fileID: 1438560793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 38.9111, y: 29.7164, z: 10}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3379,8 +3386,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 38.399998, y: 21.599998}
+  m_DrawMode: 2
+  m_Size: {x: 77.31113, y: 51.31638}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3492,9 +3499,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e905b510b92ebc47b3d872a037d2f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraDefaultPos: {x: 0, y: 0, z: -10}
   zoomSpeed: 2
   minZoom: 5
-  maxZoom: 20
+  maxZoom: 50
   panSpeed: 0.5
   Background: {fileID: 1438560793}
 --- !u!114 &1670974635
@@ -3904,7 +3912,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Level1_MapData
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2003330708
@@ -3990,8 +3998,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSpacing: 1
-  gridSize: 100
   gridColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+
 --- !u!1 &2033951442
 GameObject:
   m_ObjectHideFlags: 0
@@ -4124,6 +4132,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2033951442}
   m_CullTransparentMesh: 1
+
 --- !u!1 &2059893267
 GameObject:
   m_ObjectHideFlags: 0

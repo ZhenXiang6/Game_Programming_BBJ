@@ -369,7 +369,7 @@ Transform:
   m_GameObject: {fileID: 222702238}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -95.1, y: 3.26, z: -10}
+  m_LocalPosition: {x: -100.1, y: 2.26, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1465,8 +1465,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 662732295}
-  bagPanel: {fileID: 324017867}
-  endMenuUI: {fileID: 0}
+  confirmationPanel: {fileID: 0}
+  mainMenuSceneName: MainMenu
+  editorSceneName: EditorScene
 --- !u!1 &696642192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,8 +1793,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 662732295}
-  bagPanel: {fileID: 324017867}
-  endMenuUI: {fileID: 0}
+  confirmationPanel: {fileID: 0}
+  mainMenuSceneName: MainMenu
+  editorSceneName: EditorScene
 --- !u!1 &767554381
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,7 +2291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc7ef60915818040be220193fde7a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSceneName: Level1
+  targetSceneName: Level2_editor
   pressEText: {fileID: 1227606370}
 --- !u!61 &770674932
 BoxCollider2D:
@@ -3050,7 +3052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 5, y: 3, z: -10}
+  m_FollowOffset: {x: 0, y: 2, z: -10}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -7090,6 +7092,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   anim: {fileID: 0}
+  dashSpeed: 20
+  dashDuration: 0.2
+  dashCooldown: 1
   PlayerCanMove: 1
 --- !u!95 &1945100935
 Animator:
@@ -7177,7 +7182,7 @@ Transform:
   m_GameObject: {fileID: 1975145851}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -95.1, y: 3.26, z: -10}
+  m_LocalPosition: {x: -100.1, y: 2.26, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
