@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8685dc5ad8664c34cbdf832428381b29, type: 3}
   m_Name: LevelData2
   m_EditorClassIdentifier: 
-  levelName: 2
+  levelName: Level2
   maxStars: 3
   earnedStars: 3
   portalPosition: {fileID: 0}
+  weightLimit: 20

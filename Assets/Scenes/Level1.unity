@@ -1504,20 +1504,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1071596764}
     m_ColliderPaths:
-    - - X: -296154976
-        Y: -1663155072
-      - X: -305844992
-        Y: -1663155072
-      - X: -305844992
-        Y: -1672845056
-      - X: -296154976
-        Y: -1672845056
+    - - X: -296249984
+        Y: -1663249920
+      - X: -305749984
+        Y: -1663249920
+      - X: -305749984
+        Y: -1672750080
+      - X: -296249984
+        Y: -1672750080
   m_CompositePaths:
     m_Paths:
-    - - {x: -29.615526, y: -167.2845}
-      - {x: -29.615526, y: -166.3155}
-      - {x: -30.5845, y: -166.31554}
-      - {x: -30.58447, y: -167.2845}
+    - - {x: -29.625027, y: -167.27501}
+      - {x: -29.625027, y: -166.325}
+      - {x: -30.574999, y: -166.32501}
+      - {x: -30.57497, y: -167.27501}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -1928,7 +1928,7 @@ RectTransform:
   - {fileID: 795250136}
   - {fileID: 384263465}
   - {fileID: 1583595496}
-  m_Father: {fileID: 738442248}
+  m_Father: {fileID: 1002550668}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2413,7 +2413,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 298099149}
-  - {fileID: 662732296}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2433,7 +2432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aedccb3ebd98184488fbe30ac2bd204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endMenuUI: {fileID: 0}
+  endMenuUI: {fileID: 298099148}
 --- !u!1 &795250135
 GameObject:
   m_ObjectHideFlags: 0
@@ -2827,7 +2826,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 662732296}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4507,11 +4507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6227867e92563814da128c282ff240ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedLevel: Level1
-  availableLevels:
-  - Level1
-  - Level2
-  - Level3
+  levelData: {fileID: 11400000, guid: d97e132a982731743889cf8af91ea3c2, type: 2}
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}
