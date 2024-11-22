@@ -7,4 +7,5 @@ public class LevelData : ScriptableObject
     public int maxStars;
     public int earnedStars;
     public Transform portalPosition;
+    public int weightLimit;
 }
