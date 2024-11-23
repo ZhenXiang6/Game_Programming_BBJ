@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour
     private float dashTimeLeft;
     private float lastDashTime = -100f;   // 初始化为足够小的值
 
+    [Header("Audio Source")]
+    public AudioSource jumpFX;
+    public AudioSource deathFX;
+    public AudioSource dashFX;
+
     void Start()
     {
         blockBuilder = GetComponent<BlockBuilder>();
@@ -79,8 +84,9 @@ public class PlayerController : MonoBehaviour
 
     void HandleJump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded && PlayerCanMove && !isDashing)
+        if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)) && isGrounded && PlayerCanMove && !isDashing)
         {
+            jumpFX.Play(0);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             if (anim != null)
             {
@@ -150,6 +156,7 @@ public class PlayerController : MonoBehaviour
 
     void StartDash()
     {
+        dashFX.Play();
         isDashing = true;
         dashTimeLeft = dashDuration;
         lastDashTime = Time.time;
@@ -201,6 +208,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = spawnPosition;
         rb.velocity = Vector2.zero; // 重置速度
+        deathFX.Play();
         Debug.Log("Player respawned to the original position.");
 
         if (blockBuilder != null)
