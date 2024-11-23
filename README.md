@@ -13,3 +13,9 @@
 13. Fix the issue that character stick on wall and the animation transition problem (1102 0842)
 14. add ice and teleport cube(code未完成) (1105 0012)
 15. add dash (1105 2319)
+16. limit-blocks 當中添加方塊 以及裝進 tilemaps 裡
+17. 其中 地板消失 以及 傳送方塊 必須一格一個 tilemap，在 level2 裡面有例子可以看 為了避免踩一個 全部消失的情況發生
+18. 傳送方塊 在使用上 如果夠接近且 CD 好了 方塊上會出現 OK! 此時按 滑鼠左鍵 可以進行傳送
+19. 現階段方塊都沒有調合式的參數
+20. 新增死亡 UI
+21. 新增 Test Scene 方塊用法在裡面
