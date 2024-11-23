@@ -20,6 +20,8 @@ public class EndMenu : MonoBehaviour
 
     void EndGame()
     {
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.Play();
         endMenuUI.SetActive(true); // Show the end menu UI
         Time.timeScale = 0f; // Pause the game
     }
