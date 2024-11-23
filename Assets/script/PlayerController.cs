@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource deathFX;
     public AudioSource dashFX;
 
+    public DiedMenu diedMenu;
     void Start()
     {
         blockBuilder = GetComponent<BlockBuilder>();
@@ -204,17 +205,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Respawn()
+    public void Respawn()
     {
         transform.position = spawnPosition;
         rb.velocity = Vector2.zero; // 重置速度
         deathFX.Play();
         Debug.Log("Player respawned to the original position.");
 
-        if (blockBuilder != null)
-        {
-            blockBuilder.ResetBlocks(); // 在复活时重置方块
-        }
+        diedMenu.Pause();
     }
 
     private void OnDrawGizmosSelected()
