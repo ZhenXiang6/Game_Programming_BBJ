@@ -1198,12 +1198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start_blinking_time: 2
   blinking_interval: 1
-  isBlinking: 0
   acc_time: 0
-  isVisible: 1
-  blockRenderer: {fileID: 0}
-  tilemapCollider: {fileID: 0}
-  tilemap: {fileID: 0}
 --- !u!66 &253073052
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -31371,7 +31366,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &521223804
@@ -33110,10 +33105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   left_timer: 0
-  isCounting: 0
-  normal_jump_force: 0
   boosted_jump_force: 2
-  Player: {fileID: 0}
 --- !u!66 &819449643
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -35618,7 +35610,6 @@ MonoBehaviour:
   detectionRadius: 10
   teleportInterval: 5
   transportOK: {fileID: 518298529}
-  lastTeleportTime: -1
   closestTile: {x: 0, y: 0}
   player: {fileID: 1945100929}
   distance: 10000
@@ -36300,10 +36291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   left_timer: 0
-  isCounting: 0
-  normal_speed_force: 0
   boosted_speed_force: 2
-  Player: {fileID: 0}
 --- !u!66 &1256929075
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -38602,6 +38590,7 @@ MonoBehaviour:
   jumpFX: {fileID: 1920907497}
   deathFX: {fileID: 1957276471}
   dashFX: {fileID: 79805305}
+  diedMenu: {fileID: 939427559}
 --- !u!95 &1945100935
 Animator:
   serializedVersion: 5
@@ -39174,12 +39163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start_blinking_time: 2
   blinking_interval: 1
-  isBlinking: 0
   acc_time: 0
-  isVisible: 1
-  blockRenderer: {fileID: 0}
-  tilemapCollider: {fileID: 0}
-  tilemap: {fileID: 0}
 --- !u!66 &2083606949
 CompositeCollider2D:
   m_ObjectHideFlags: 0
