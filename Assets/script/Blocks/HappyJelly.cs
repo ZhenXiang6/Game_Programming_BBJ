@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BouncyBlock : MonoBehaviour
+public class HappyJelly : MonoBehaviour
 {
     public float bounceForce = 10f;  // 彈開的力量
 

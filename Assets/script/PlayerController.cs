@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.Callbacks;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public float dashCooldown = 1f;      // 冲刺冷却时间
 
     private Rigidbody2D rb;
+    
     private bool isGrounded;
     private bool wasGrounded;
     public bool PlayerCanMove = true;
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private float dashTimeLeft;
     private float lastDashTime = -100f;   // 初始化为足够小的值
 
+    public DiedMenu diedMenu;
     void Start()
     {
         blockBuilder = GetComponent<BlockBuilder>();
@@ -132,6 +135,7 @@ public class PlayerController : MonoBehaviour
             StartDash();
         }
 
+
         if (isDashing)
         {
             if (dashTimeLeft > 0)
@@ -197,7 +201,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Respawn()
+    public void Respawn()
     {
         transform.position = spawnPosition;
         rb.velocity = Vector2.zero; // 重置速度
@@ -207,6 +211,8 @@ public class PlayerController : MonoBehaviour
         {
             blockBuilder.ResetBlocks(); // 在复活时重置方块
         }
+
+        diedMenu.Pause();
     }
 
     private void OnDrawGizmosSelected()

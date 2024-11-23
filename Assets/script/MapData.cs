@@ -13,6 +13,5 @@ public class BlockData
 [System.Serializable]
 public class MapData
 {
-    public float weightSum;
     public List<BlockData> playerBlocks = new List<BlockData>();   // 玩家方塊
 }

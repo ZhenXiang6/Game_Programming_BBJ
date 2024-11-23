@@ -1,6 +1,5 @@
 using System.IO;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -8,12 +7,13 @@ using UnityEngine.EventSystems;
 
 public class LevelEditorController : MonoBehaviour
 {
-    [Header("Level Configuration")]
-    public LevelData levelData; // Reference to the ScriptableObject
+    [Header("Level Settings")]
+    [Tooltip("選擇當前關卡")]
+    public string selectedLevel;  // 選擇的關卡名稱
 
-    private float currentWeight; // Current weight total
-    public Text weightDisplay; // Text UI to display the weight
-    private bool overweight = false; // Prevent multiple flashing effects at the same time
+    [Tooltip("可用的關卡列表")]
+    public List<string> availableLevels = new List<string> { "Level1", "Level2", "Level3" }; // 預定義的關卡列表
+
     public static MapData currentMapData;
 
     public GameObject[] blockPrefabs;
@@ -35,16 +35,8 @@ public class LevelEditorController : MonoBehaviour
 
     void Start()
     {
-        if (levelData == null)
-        {
-            Debug.LogError("LevelData is not assigned!");
-            return;
-        }
-
-        // Initialize UI with LevelData values
-        Debug.Log($"Level: {levelData.levelName}, Max Stars: {levelData.maxStars}, Weight Limit: {levelData.weightLimit}");
+        
         LoadMapFromPlayerPrefs();
-
 
         // 隱藏暗色遮罩
         darkOverlay.SetActive(false);
@@ -165,13 +157,9 @@ public class LevelEditorController : MonoBehaviour
     {
         if (selectedBlock != null && Input.GetKeyDown(KeyCode.Delete))
         {
-            float blockWeight = selectedBlock.GetComponent<BlockInfo>().weight;
-
             placedPlayerBlocks.Remove(selectedBlock);
             Destroy(selectedBlock);
-
-            // Update weight based on the deleted block
-            UpdateWeight(-blockWeight);
+            selectedBlock = null;
         }
     }
 
@@ -202,43 +190,31 @@ public class LevelEditorController : MonoBehaviour
 
     // 處理方塊放置
     void HandleBlockPlacement()
+{
+    // 如果滑鼠在 UI 上，則不進行放置方塊操作
+    if (selectedBlockPrefab == null || isSelectMode || EventSystem.current.IsPointerOverGameObject()) 
+        return;
+
+    if (Input.GetMouseButtonDown(0) && previewBlock != null) // 左鍵放置新方塊
     {
-        if (selectedBlockPrefab == null || isSelectMode || EventSystem.current.IsPointerOverGameObject()) 
-            return;
+        Vector3 position = previewBlock.transform.position;
+        position.z = 0;
+        
+        // 使用 OverlapCircle 檢查位置附近是否已有方塊
+        float checkRadius = gridSpacing / 2f * 0.9f;
+        Collider2D overlap = Physics2D.OverlapCircle(position, checkRadius);
 
-        if (Input.GetMouseButtonDown(0) && previewBlock != null)
+        if (overlap == null)
         {
-            float blockWeight = selectedBlockPrefab.GetComponent<BlockInfo>().weight;
-            if (currentWeight + blockWeight > levelData.weightLimit)
-            {
-                StartCoroutine(FlashWeightDisplay());
-
-                Debug.Log("Weight limit exceeded! Cannot place this block.");
-                return; // Prevent placing the block
-            }
-
-            Vector3 position = previewBlock.transform.position;
-            position.z = 0;
-
-            float checkRadius = gridSpacing / 2f * 0.9f;
-            Collider2D overlap = Physics2D.OverlapCircle(position, checkRadius);
-
-            if (overlap == null)
-            {
-                GameObject newBlock = Instantiate(selectedBlockPrefab, position, Quaternion.identity, mapContainer);
-                placedPlayerBlocks.Add(newBlock);
-
-                // 更新權重
-                blockWeight = newBlock.GetComponent<BlockInfo>().weight;
-                UpdateWeight(blockWeight);
-            }
-            else
-            {
-                Debug.Log("該位置已有方塊，無法放置。");
-            }
+            GameObject newBlock = Instantiate(selectedBlockPrefab, position, Quaternion.identity, mapContainer);
+            placedPlayerBlocks.Add(newBlock);
+        }
+        else
+        {
+            Debug.Log("該位置已有方塊，無法放置。");
         }
     }
-
+}
 
 
 
@@ -291,12 +267,12 @@ public class LevelEditorController : MonoBehaviour
 }
 
 
-// ----------------------------------------------------------------
+
 
     // 儲存、載入、清除等其他功能
     public void SaveMap()
     {
-        string MapKey = levelData.levelName;
+        string MapKey = selectedLevel;
         MapData mapData = new MapData();
 
         foreach (GameObject block in placedPlayerBlocks)
@@ -309,7 +285,6 @@ public class LevelEditorController : MonoBehaviour
             };
             mapData.playerBlocks.Add(blockData);
         }
-        mapData.weightSum = currentWeight;
 
         currentMapData = mapData;
         string json = JsonUtility.ToJson(mapData, true);
@@ -320,7 +295,7 @@ public class LevelEditorController : MonoBehaviour
 
     public void LoadMapFromPlayerPrefs()
     {
-        string MapKey = levelData.levelName;
+        string MapKey = selectedLevel;
         if (PlayerPrefs.HasKey(MapKey))
         {
             string json = PlayerPrefs.GetString(MapKey, null);
@@ -345,9 +320,7 @@ public class LevelEditorController : MonoBehaviour
                 GameObject newBlock = Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
                 placedPlayerBlocks.Add(newBlock);
             }
-            
         }
-        SetWeight(mapData.weightSum);
     }
 
     private GameObject FindBlockPrefab(string blockType)
@@ -372,58 +345,17 @@ public class LevelEditorController : MonoBehaviour
             Destroy(block);
         }
         placedPlayerBlocks.Clear();
-        SetWeight(0);
     }
 
     public void StartGame()
     {
         SaveMap();
-        SceneManager.LoadScene(levelData.levelName);
+        SceneManager.LoadScene(selectedLevel);
     }
     private void OnApplicationQuit()
     {
         ClearMap();
         SaveMap();
     }
-
-// ----------------------------------------------------------------
-
-    public void UpdateWeight(float weightChange)
-    {
-        currentWeight += weightChange;
-        UpdateWeightUI();
-    }
-    public void SetWeight(float weight)
-    {
-        currentWeight = weight;
-        UpdateWeightUI();
-    }
-
-    private IEnumerator FlashWeightDisplay()
-    {
-        overweight = true;
-        Color originalColor = weightDisplay.color;
-
-        // Flash the text red for a short period
-        for (int i = 0; i < 3; i++)
-        {
-            weightDisplay.color = Color.red;
-            yield return new WaitForSeconds(0.1f);
-            weightDisplay.color = originalColor;
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        weightDisplay.color = originalColor;
-        overweight = false;
-    }
-    private void UpdateWeightUI()
-    {
-        // Update progress bar value
-        float progress = currentWeight / levelData.weightLimit;
-
-        // Update text to show weight
-        weightDisplay.text = $"Weight: {currentWeight}/{levelData.weightLimit}";
-    }
-
-
 }
+
