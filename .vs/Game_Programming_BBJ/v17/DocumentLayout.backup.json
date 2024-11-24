@@ -3,7 +3,15 @@
   "WorkspaceRootPath": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|c:\\users\\morri\\onedrive\\\u6587\u4EF6\\github\\game_programming_bbj\\assets\\script\\blockbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|c:\\users\\morri\\onedrive\\\u6587\u4EF6\\github\\game_programming_bbj\\assets\\script\\npcs\\npc tutorial\\npc talk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\npcs\\npc tutorial\\npc talk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|c:\\users\\morri\\onedrive\\\u6587\u4EF6\\github\\game_programming_bbj\\assets\\script\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\assets\\script\\blockbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\blockbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -19,6 +27,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "NPC Talk.cs",
+              "DocumentMoniker": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\script\\NPCs\\NPC Tutorial\\NPC Talk.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\NPCs\\NPC Tutorial\\NPC Talk.cs",
+              "ToolTip": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\script\\NPCs\\NPC Tutorial\\NPC Talk.cs",
+              "RelativeToolTip": "Assets\\script\\NPCs\\NPC Tutorial\\NPC Talk.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-24T18:34:00.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\script\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\PlayerController.cs",
+              "ToolTip": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\script\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\script\\PlayerController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAIBJwNwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-12T07:59:05.609Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "BlockBuilder.cs",
               "DocumentMoniker": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\script\\BlockBuilder.cs",
               "RelativeDocumentMoniker": "Assets\\script\\BlockBuilder.cs",
@@ -26,8 +60,7 @@
               "RelativeToolTip": "Assets\\script\\BlockBuilder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAKEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T06:52:25.953Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T06:52:25.953Z"
             }
           ]
         }
