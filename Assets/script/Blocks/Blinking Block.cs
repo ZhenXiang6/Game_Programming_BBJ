@@ -12,7 +12,7 @@ public class BlinkingBlock : MonoBehaviour
     [Header("閃爍設定")]
     public float blinkInterval = 0.2f;      // 閃爍的間隔時間（秒）
 
-    private bool isVisible = true;           // 當前方塊的可見狀態
+    private bool isBlinking = false;         // 是否正在閃爍
 
     private Tilemap tilemap;                 // Tilemap 組件的引用
     private TilemapCollider2D tilemapCollider; // TilemapCollider2D 組件的引用
@@ -53,12 +53,14 @@ public class BlinkingBlock : MonoBehaviour
 
             // 閃爍階段
             float blinkElapsed = 0f;
+            isBlinking = true;
             while (blinkElapsed < blinkDuration)
             {
-                ToggleVisibility();
+                ToggleRendererVisibility(); // 僅切換渲染器的可見性
                 yield return new WaitForSeconds(blinkInterval);
                 blinkElapsed += blinkInterval;
             }
+            isBlinking = false;
 
             // 確保方塊在閃爍後是不可見的
             SetVisible(false);
@@ -70,38 +72,33 @@ public class BlinkingBlock : MonoBehaviour
     }
 
     /// <summary>
-    /// 切換方塊的可見性
+    /// 僅切換渲染器的可見性，保持碰撞器啟用
     /// </summary>
-    void ToggleVisibility()
+    void ToggleRendererVisibility()
     {
-        isVisible = !isVisible;
-        UpdateVisibility();
+        if (tilemap != null)
+        {
+            // 切換 Tilemap 的顏色透明度
+            Color currentColor = tilemap.color;
+            bool newVisibility = currentColor.a > 0f;
+            tilemap.color = newVisibility ? new Color(1f, 1f, 1f, 0f) : Color.white;
+        }
     }
 
     /// <summary>
-    /// 設定方塊的可見性
+    /// 設定方塊的可見性和碰撞器狀態
     /// </summary>
     /// <param name="visible">是否可見</param>
     void SetVisible(bool visible)
     {
-        isVisible = visible;
-        UpdateVisibility();
-    }
-
-    /// <summary>
-    /// 根據 isVisible 變數更新方塊的可見性和碰撞
-    /// </summary>
-    void UpdateVisibility()
-    {
         if (tilemap != null)
         {
-            // 顯示或隱藏 Tilemap
-            tilemap.color = isVisible ? Color.white : new Color(1f, 1f, 1f, 0f); // 完全透明表示不可見
+            tilemap.color = visible ? Color.white : new Color(1f, 1f, 1f, 0f); // 完全透明表示不可見
         }
 
         if (tilemapCollider != null)
         {
-            tilemapCollider.enabled = isVisible; // 啟用或禁用碰撞體
+            tilemapCollider.enabled = visible; // 啟用或禁用碰撞體
         }
     }
 
@@ -116,5 +113,19 @@ public class BlinkingBlock : MonoBehaviour
         {
             tilemapCollider.enabled = true;
         }
+        isBlinking = false;
+    }
+
+    /// <summary>
+    /// 重置方塊，使其重新可見並可再次觸發閃爍
+    /// </summary>
+    public void ResetBlock()
+    {
+        SetVisible(true);
+        if (tilemapCollider != null)
+        {
+            tilemapCollider.enabled = true; // 確保碰撞器啟用
+        }
+        isBlinking = false;
     }
 }
