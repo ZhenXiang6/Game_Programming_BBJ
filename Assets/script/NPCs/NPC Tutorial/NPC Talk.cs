@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Flower;
+using System.Drawing;
 
-public class NPCTutorialTalk : MonoBehaviour
+public class NPCTalk : MonoBehaviour
 {
     FlowerSystem flowerSys;
     private int progress = 0;
@@ -17,13 +18,15 @@ public class NPCTutorialTalk : MonoBehaviour
     public PlayerController playerController;
 
     public AudioSource dialogFX;
+    public String text;
 
+    public GameObject mouseClick;
     void Start()
     {
         isTalking = false;
         PressEHint.SetActive(false);
 
-        flowerSys = FlowerManager.Instance.CreateFlowerSystem("FlowerSample", true);
+        flowerSys = FlowerManager.Instance.CreateFlowerSystem(text, true);
 
         // Register commands and effects if needed
         flowerSys.RegisterCommand("UsageCase", CustomizedFunction);
@@ -35,6 +38,7 @@ public class NPCTutorialTalk : MonoBehaviour
 
     void Update()
     {
+
         if (Vector3.Distance(Player.transform.position, NPC.transform.position) <= showDistance)
         {
             PressEHint.SetActive(true);
@@ -44,6 +48,7 @@ public class NPCTutorialTalk : MonoBehaviour
                 dialogFX.Play(0);
                 StopMove();
                 StartDialogue();
+                mouseClick.SetActive(true);
             }
         }
         else
@@ -57,19 +62,20 @@ public class NPCTutorialTalk : MonoBehaviour
             switch (progress)
             {
                 case 0:
-                    flowerSys.ReadTextFromResource("start");
+                    flowerSys.ReadTextFromResource(text);
                     break;
                 default:
                     isTalking = false; // Mark the end of the dialogue
                     ResumeMove(); // Resume movement after the last dialogue
                     flowerSys.RemoveDialog();
+                    mouseClick.SetActive(false);
                     break;  
             }
             progress++;
         }
 
         // Handle input for dialogue progression
-        if (isTalking && Input.GetKeyDown(KeyCode.E))
+        if (isTalking && (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)))
         {
             dialogFX.Play(0);
             flowerSys.Next(); // Continue dialogue
