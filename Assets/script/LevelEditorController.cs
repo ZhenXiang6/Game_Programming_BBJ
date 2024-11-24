@@ -206,7 +206,7 @@ public class LevelEditorController : MonoBehaviour
         if (selectedBlockPrefab == null || isSelectMode || EventSystem.current.IsPointerOverGameObject()) 
             return;
 
-        if (Input.GetMouseButtonDown(0) && previewBlock != null)
+        if (Input.GetMouseButtonDown(0) && previewBlock != null && !Input.GetKey(KeyCode.LeftAlt))
         {
             float blockWeight = selectedBlockPrefab.GetComponent<BlockInfo>().weight;
             if (currentWeight + blockWeight > levelData.weightLimit)
