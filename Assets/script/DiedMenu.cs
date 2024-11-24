@@ -14,11 +14,14 @@ public class DiedMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         diedMenuUI.SetActive(false);
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GoBackMenu ()
     {
         SceneManager.LoadScene("Level Selector");
-        ContinuePlaying();
+        Time.timeScale = 1f;
+        diedMenuUI.SetActive(false);
     }
 }
