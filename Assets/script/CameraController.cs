@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     public float maxZoom = 20f;           // 最大縮放值
     public float panSpeed = 0.5f;         // 拖動速度
     public GameObject Background;
-    
+
     private Vector2 mapBounds;            // 地圖邊界大小
     private Vector3 backgroundCenter;     // 背景中心位置
     private Camera mainCamera;
@@ -31,8 +31,8 @@ public class CameraController : MonoBehaviour
             // 獲取背景的中心位置
             backgroundCenter = Background.transform.position;
 
-            // 將攝影機定位到背景的中心
-            PositionCameraToCenter();
+            // 使用 CameraDefaultPos 設定攝影機位置
+            SetCameraPosition(CameraDefaultPos);
         }
         else
         {
@@ -40,18 +40,18 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void PositionCameraToCenter()
+    private void SetCameraPosition(Vector3 position)
     {
         // 計算攝影機的視野範圍
         float cameraHeight = mainCamera.orthographicSize;
         float cameraWidth = cameraHeight * mainCamera.aspect;
 
         // 確保攝影機的視野完全位於背景內
-        float xPosition = Mathf.Clamp(backgroundCenter.x, backgroundCenter.x - mapBounds.x + cameraWidth, backgroundCenter.x + mapBounds.x - cameraWidth);
-        float yPosition = Mathf.Clamp(backgroundCenter.y, backgroundCenter.y - mapBounds.y + cameraHeight, backgroundCenter.y + mapBounds.y - cameraHeight);
+        float xPosition = Mathf.Clamp(position.x, backgroundCenter.x - mapBounds.x + cameraWidth, backgroundCenter.x + mapBounds.x - cameraWidth);
+        float yPosition = Mathf.Clamp(position.y, backgroundCenter.y - mapBounds.y + cameraHeight, backgroundCenter.y + mapBounds.y - cameraHeight);
 
         // 設定攝影機位置
-        mainCamera.transform.position = new Vector3(xPosition, yPosition, mainCamera.transform.position.z);
+        mainCamera.transform.position = new Vector3(xPosition, yPosition, position.z);
     }
 
     private void Update()
