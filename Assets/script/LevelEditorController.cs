@@ -45,6 +45,7 @@ public class LevelEditorController : MonoBehaviour
         Debug.Log($"Level: {levelData.levelName}, Max Stars: {levelData.maxStars}, Weight Limit: {levelData.weightLimit}");
         LoadMapFromPlayerPrefs();
 
+        UpdateWeightUI();
 
         // 隱藏暗色遮罩
         darkOverlay.SetActive(false);

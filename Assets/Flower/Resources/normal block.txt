@@ -1,0 +1,3 @@
+[show]
+Here we will introduce the functions of different blocks![w]
+For example, this block is just an ordinary block.[w]

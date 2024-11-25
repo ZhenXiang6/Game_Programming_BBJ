@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial Level.unity
     guid: fe8750e9785ac4744add91fb9006679c
   - enabled: 1
+    path: Assets/Scenes/Tutorial Level Block.unity
+    guid: 2989c04873df43d43bddb674aca64882
+  - enabled: 1
     path: Assets/Scenes/Tutorial Level_editor.unity
     guid: 5e39b78aa97f42e48bf23b179d08b71f
   m_configObjects: {}

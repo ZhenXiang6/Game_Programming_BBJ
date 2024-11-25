@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8685dc5ad8664c34cbdf832428381b29, type: 3}
   m_Name: LevelData Tutorial
   m_EditorClassIdentifier: 
-  levelName: Tutorial Level
+  levelName: Tutorial Level Block
   maxStars: 3
   earnedStars: 3
   portalPosition: {fileID: 0}

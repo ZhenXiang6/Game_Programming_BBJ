@@ -1,0 +1,2 @@
+[show]
+This is a bouncing block. You can step on it to test its effect![w]
