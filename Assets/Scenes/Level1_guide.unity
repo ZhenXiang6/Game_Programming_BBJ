@@ -1527,7 +1527,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1552,7 +1552,7 @@ Transform:
   m_GameObject: {fileID: 222702238}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.078167, y: 8.013953, z: -10.928371}
+  m_LocalPosition: {x: 5.3408165, y: 9.6750345, z: -10.928371}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2045,8 +2045,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416744222}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.035243638, y: -0.70622796, z: 0.035243638, w: 0.7062279}
-  m_LocalPosition: {x: -7.078167, y: 8.013953, z: -0.92837185}
+  m_LocalRotation: {x: 0.019695282, y: -0.70683247, z: 0.019695282, w: 0.7068324}
+  m_LocalPosition: {x: 5.3408165, y: 9.6750345, z: -0.92837185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9313,7 +9313,7 @@ MonoBehaviour:
   m_Follow: {fileID: 416744224}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 10
+    OrthographicSize: 15
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -9339,7 +9339,7 @@ Transform:
   m_GameObject: {fileID: 1371442704}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.078167, y: 8.013953, z: -10.928371}
+  m_LocalPosition: {x: 5.3408165, y: 9.6750345, z: -10.928371}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9775,31 +9775,25 @@ MonoBehaviour:
     width: 0.2
   m_Looped: 0
   m_Waypoints:
-  - position: {x: 4.421833, y: -5.3860464, z: 0}
+  - position: {x: 16.840816, y: -3.724965, z: 0}
     roll: 0
-  - position: {x: -21.111855, y: 0.18361855, z: 0}
+  - position: {x: -17.758457, y: 1.9401608, z: 0}
     roll: 0
   - position: {x: -24.407944, y: 29.49122, z: 0}
     roll: 0
-  - position: {x: -38.79585, y: 25.542936, z: 0}
+  - position: {x: -46.46422, y: 32.684875, z: 0}
     roll: 0
-  - position: {x: -49.239082, y: 28.900965, z: 0}
+  - position: {x: -56.689407, y: 50.21129, z: 0}
     roll: 0
-  - position: {x: -50.275562, y: 47.268753, z: 0}
-    roll: 0
-  - position: {x: -57.69845, y: 54.49971, z: 0}
-    roll: 0
-  - position: {x: -63.27304, y: 44.0511, z: 0}
-    roll: 0
-  - position: {x: -70.72845, y: 29.85161, z: 0}
+  - position: {x: -65.683235, y: 31.112913, z: 0}
     roll: 0
   - position: {x: -82.62334, y: 21.096159, z: 0}
     roll: 0
   - position: {x: -104.34591, y: 19.946825, z: 0}
     roll: 0
-  - position: {x: -113.87542, y: 7.762661, z: 0}
+  - position: {x: -114.81389, y: 12.454979, z: 0}
     roll: 0
-  - position: {x: -130.05037, y: 15.350906, z: 0}
+  - position: {x: -128.8773, y: 9.3682, z: 0}
     roll: 0
   - position: {x: -131.7319, y: -4.5549765, z: 0}
     roll: 0
