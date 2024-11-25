@@ -813,7 +813,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2348,17 +2348,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 994037663}
-    m_ColliderPaths:
-    - - X: -296249984
-        Y: -1867249920
-      - X: -305749984
-        Y: -1867249920
-      - X: -305749984
-        Y: -1876750080
-      - X: -296249984
-        Y: -1876750080
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: -29.625027, y: -187.675}
@@ -5496,11 +5486,6 @@ PrefabInstance:
 --- !u!4 &994037662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-  m_PrefabInstance: {fileID: 994037661}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &994037663 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 3334188273914085337, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   m_PrefabInstance: {fileID: 994037661}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1087072005
@@ -10280,7 +10265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1471760176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12412,7 +12397,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1945100931}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 15
+    OrthographicSize: 10
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
