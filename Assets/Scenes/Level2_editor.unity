@@ -30836,6 +30836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData: {fileID: 11400000, guid: 69d43c66d7db071419ac34174de4dadc, type: 2}
   weightDisplay: {fileID: 39928129}
+  levelGrid: {fileID: 1020083554}
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}
@@ -33696,6 +33697,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &1825860543
 CompositeCollider2D:
   m_ObjectHideFlags: 0
