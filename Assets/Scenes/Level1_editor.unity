@@ -445,6 +445,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &399693755
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -1212,6 +1215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &607746518
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -21121,6 +21127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &686579447
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -21437,6 +21446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &696394606
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -22993,6 +23005,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &1065075095
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -23309,6 +23324,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &1211878029
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -23731,6 +23749,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &1357106621
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -24047,6 +24068,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &1426214537
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -24773,7 +24797,7 @@ Transform:
   m_GameObject: {fileID: 1670974630}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -200, y: 1.905376, z: -16.7306}
+  m_LocalPosition: {x: 4.699999, y: 8.27, z: 3.8915854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24922,6 +24946,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &1727194885
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -25238,6 +25265,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &1810274842
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -28409,6 +28439,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29264d6160c4fbf822405cff9348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 2
+  blinkInterval: 0.2
+  disappearDelay: 1
 --- !u!66 &2070081946
 CompositeCollider2D:
   m_ObjectHideFlags: 0
