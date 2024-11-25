@@ -1,2 +1,2 @@
 [show]
-使用 A 鍵和 D 鍵控制角色左右移動，按下空白鍵進行跳躍。 嘗試跳過這個空洞吧! [w]
+Use "A" and "D" to move left and right, and press the "Spacebar" to jump. Try jumping over this gap![w]

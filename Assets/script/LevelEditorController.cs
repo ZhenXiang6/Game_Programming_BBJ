@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
 public class LevelEditorController : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class LevelEditorController : MonoBehaviour
     public Text weightDisplay; // Text UI to display the weight
     private bool overweight = false; // Prevent multiple flashing effects at the same time
     public static MapData currentMapData;
+
+    [Header("Tilemap Settings")]
+    public Grid levelGrid; // 指向場景的 Grid 物件
+    private List<Tilemap> tilemaps = new List<Tilemap>(); // 存儲所有 Tilemap
 
     public GameObject[] blockPrefabs;
     public Transform mapContainer;
@@ -27,7 +32,7 @@ public class LevelEditorController : MonoBehaviour
     public float gridSpacing = 1f;
 
     private bool isSelectMode = false;             // 是否進入選取模式
-    
+
     private GameObject previewBlock;
     private GameObject selectedBlockPrefab;
     private GameObject selectedBlock;
@@ -41,11 +46,14 @@ public class LevelEditorController : MonoBehaviour
             return;
         }
 
+
         // Initialize UI with LevelData values
         Debug.Log($"Level: {levelData.levelName}, Max Stars: {levelData.maxStars}, Weight Limit: {levelData.weightLimit}");
         LoadMapFromPlayerPrefs();
 
-        UpdateWeightUI();
+
+        tilemaps.AddRange(levelGrid.GetComponentsInChildren<Tilemap>());
+        Debug.Log($"Detected {tilemaps.Count} Tilemaps in the scene.");
 
         // 隱藏暗色遮罩
         darkOverlay.SetActive(false);
@@ -67,48 +75,61 @@ public class LevelEditorController : MonoBehaviour
     }
 
     // 切換選取模式
-   public void ToggleSelectMode()
-{
-    isSelectMode = !isSelectMode;
-    
-    if (isSelectMode)
+    public void ToggleSelectMode()
     {
-        // 進入選取模式，顯示暗色遮罩
-        darkOverlay.SetActive(true);
-        selectedBlockPrefab = null;
-        if (previewBlock != null)
+        isSelectMode = !isSelectMode;
+
+        if (isSelectMode)
         {
-            Destroy(previewBlock); // 清除預覽方塊
+            // 進入選取模式，顯示暗色遮罩
+            darkOverlay.SetActive(true);
+            selectedBlockPrefab = null;
+            if (previewBlock != null)
+            {
+                Destroy(previewBlock); // 清除預覽方塊
+            }
+        }
+        else
+        {
+            // 退出選取模式，隱藏暗色遮罩並取消選中
+            darkOverlay.SetActive(false);
+            DeselectBlock();
         }
     }
-    else
+    private bool IsOverlappingTilemap(Vector3 worldPosition)
     {
-        // 退出選取模式，隱藏暗色遮罩並取消選中
-        darkOverlay.SetActive(false);
-        DeselectBlock();
+        foreach (var tilemap in tilemaps)
+        {
+            Vector3Int cellPosition = tilemap.WorldToCell(worldPosition);
+            if (tilemap.HasTile(cellPosition))
+            {
+                Debug.Log($"Overlap detected with Tilemap: {tilemap.name} at position {cellPosition}");
+                return true; // 如果任何 Tilemap 有 Tile，返回 true
+            }
+        }
+        return false;
     }
-}
 
     // 處理選取模式下的方塊選取
     void HandleBlockSelection()
-{
-    // 如果滑鼠在 UI 上，則不進行選取操作
-    if (EventSystem.current.IsPointerOverGameObject()) 
-        return;
-
-    if (Input.GetMouseButtonDown(0))
     {
-        Vector3 mousePosition = GetMouseWorldPosition();
-        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+        // 如果滑鼠在 UI 上，則不進行選取操作
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
 
-        if (hit.collider != null && placedPlayerBlocks.Contains(hit.collider.gameObject))
+        if (Input.GetMouseButtonDown(0))
         {
-            DeselectBlock(); // 取消之前的選中
-            selectedBlock = hit.collider.gameObject;
-            HighlightBlock(selectedBlock, true);
+            Vector3 mousePosition = GetMouseWorldPosition();
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+            if (hit.collider != null && placedPlayerBlocks.Contains(hit.collider.gameObject))
+            {
+                DeselectBlock(); // 取消之前的選中
+                selectedBlock = hit.collider.gameObject;
+                HighlightBlock(selectedBlock, true);
+            }
         }
     }
-}
     // 取消選中的方塊
     void DeselectBlock()
     {
@@ -123,42 +144,46 @@ public class LevelEditorController : MonoBehaviour
 
     // 控制選中方塊的移動和旋轉
     void HandleSelectedBlockMovement()
-{
-    if (EventSystem.current.IsPointerOverGameObject()) 
-        return;
-    if (selectedBlock != null)
     {
-        Vector3 mousePosition = GetMouseWorldPosition();
-        Vector3 targetPosition = SnapToGrid(mousePosition);
-
-        if (Input.GetMouseButton(0)) // 按住左鍵拖動方塊
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+        if (selectedBlock != null)
         {
-            // 使用 OverlapCircle 檢查目標位置是否已有方塊
-            float checkRadius = gridSpacing / 2f * 0.9f;
-            Collider2D overlap = Physics2D.OverlapCircle(targetPosition, checkRadius);
- 
-            // 如果重疊對象為空或者為當前選中方塊本身，則允許移動
-            if (overlap == null || overlap.gameObject == selectedBlock)
+            Vector3 mousePosition = GetMouseWorldPosition();
+            Vector3 targetPosition = SnapToGrid(new Vector3(mousePosition.x, mousePosition.y, 0));
+
+            if (Input.GetMouseButton(0)) // 按住左鍵拖動方塊
             {
-                selectedBlock.transform.position = targetPosition;
+                // 使用 OverlapCircle 檢查目標位置是否已有方塊
+                float checkRadius = gridSpacing / 2f * 0.9f;
+                Collider2D overlap = Physics2D.OverlapCircle(targetPosition, checkRadius);
+                if (IsOverlappingTilemap(targetPosition))
+                {
+                    Debug.Log("Cannot place block, overlaps with Tilemap.");
+                    return; // 如果與 Tilemap 重疊，禁止放置
+                }
+                // 如果重疊對象為空或者為當前選中方塊本身，則允許移動
+                if (overlap == null || overlap.gameObject == selectedBlock)
+                {
+                    selectedBlock.transform.position = targetPosition;
+                }
+                else
+                {
+                    Debug.Log("該位置已有方塊，無法移動到該位置。");
+                }
             }
-            else
+
+            if (Input.GetKeyDown(KeyCode.Q)) // Q 鍵逆時針旋轉
             {
-                Debug.Log("該位置已有方塊，無法移動到該位置。");
+                selectedBlock.transform.Rotate(0, 0, rotationAngle);
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.Q)) // Q 鍵逆時針旋轉
-        {
-            selectedBlock.transform.Rotate(0, 0, rotationAngle);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E)) // E 鍵順時針旋轉
-        {
-            selectedBlock.transform.Rotate(0, 0, -rotationAngle);
+            if (Input.GetKeyDown(KeyCode.E)) // E 鍵順時針旋轉
+            {
+                selectedBlock.transform.Rotate(0, 0, -rotationAngle);
+            }
         }
     }
-}
 
 
     // 刪除選中的方塊
@@ -204,7 +229,7 @@ public class LevelEditorController : MonoBehaviour
     // 處理方塊放置
     void HandleBlockPlacement()
     {
-        if (selectedBlockPrefab == null || isSelectMode || EventSystem.current.IsPointerOverGameObject()) 
+        if (selectedBlockPrefab == null || isSelectMode || EventSystem.current.IsPointerOverGameObject())
             return;
 
         if (Input.GetMouseButtonDown(0) && previewBlock != null && !Input.GetKey(KeyCode.LeftAlt))
@@ -220,6 +245,12 @@ public class LevelEditorController : MonoBehaviour
 
             Vector3 position = previewBlock.transform.position;
             position.z = 0;
+            if (IsOverlappingTilemap(position))
+            {
+                Debug.Log("Cannot place block, overlaps with Tilemap.");
+                return; // 如果與 Tilemap 重疊，禁止放置
+            }
+
 
             float checkRadius = gridSpacing / 2f * 0.9f;
             Collider2D overlap = Physics2D.OverlapCircle(position, checkRadius);
@@ -242,16 +273,15 @@ public class LevelEditorController : MonoBehaviour
 
 
 
-
     // 將位置對齊到網格
-      Vector3 SnapToGrid(Vector3 position)
-{
-    // 計算網格對齊的中心點
-    float snappedX = Mathf.Round((position.x - gridSpacing / 2f) / gridSpacing) * gridSpacing + gridSpacing / 2f;
-    float snappedY = Mathf.Round((position.y - gridSpacing / 2f) / gridSpacing) * gridSpacing + gridSpacing / 2f;
+    Vector3 SnapToGrid(Vector3 position)
+    {
+        // 計算網格對齊的中心點
+        float snappedX = Mathf.Round((position.x - gridSpacing / 2f) / gridSpacing) * gridSpacing + gridSpacing / 2f;
+        float snappedY = Mathf.Round((position.y - gridSpacing / 2f) / gridSpacing) * gridSpacing + gridSpacing / 2f;
 
-    return new Vector3(snappedX, snappedY, position.z);
-}
+        return new Vector3(snappedX, snappedY, position.z);
+    }
 
 
     Vector3 GetMouseWorldPosition()
@@ -263,36 +293,36 @@ public class LevelEditorController : MonoBehaviour
 
     // 選擇一個方塊類型並顯示預覽
     public void SelectBlock(int index)
-{
-    // 確保索引在範圍內，且未處於選取模式
-    if (index >= 0 && index < blockPrefabs.Length && !isSelectMode)
     {
-        // 清除當前的預覽方塊
-        if (previewBlock != null)
+        // 確保索引在範圍內，且未處於選取模式
+        if (index >= 0 && index < blockPrefabs.Length && !isSelectMode)
         {
-            Destroy(previewBlock);
+            // 清除當前的預覽方塊
+            if (previewBlock != null)
+            {
+                Destroy(previewBlock);
+            }
+
+            // 選擇新的方塊並生成預覽
+            selectedBlockPrefab = blockPrefabs[index];
+            previewBlock = Instantiate(selectedBlockPrefab, mapContainer); // 將 mapContainer 設為父物件
+            previewBlock.GetComponent<Collider2D>().enabled = false; // 關閉碰撞
+
+            // 設定預覽方塊位置到鼠標位置
+            Vector3 mousePosition = GetMouseWorldPosition();
+            previewBlock.transform.position = SnapToGrid(mousePosition);
+
+            // 清除已選中的已放置方塊
+            selectedBlock = null;
+
+            // 自動退出選取模式並更新按鈕狀態
+            isSelectMode = false;
+            selectModeButton.interactable = true;
         }
-
-        // 選擇新的方塊並生成預覽
-        selectedBlockPrefab = blockPrefabs[index];
-        previewBlock = Instantiate(selectedBlockPrefab, mapContainer); // 將 mapContainer 設為父物件
-        previewBlock.GetComponent<Collider2D>().enabled = false; // 關閉碰撞
-
-        // 設定預覽方塊位置到鼠標位置
-        Vector3 mousePosition = GetMouseWorldPosition();
-        previewBlock.transform.position = SnapToGrid(mousePosition);
-
-        // 清除已選中的已放置方塊
-        selectedBlock = null;
-
-        // 自動退出選取模式並更新按鈕狀態
-        isSelectMode = false;
-        selectModeButton.interactable = true;
     }
-}
 
 
-// ----------------------------------------------------------------
+    // ----------------------------------------------------------------
 
     // 儲存、載入、清除等其他功能
     public void SaveMap()

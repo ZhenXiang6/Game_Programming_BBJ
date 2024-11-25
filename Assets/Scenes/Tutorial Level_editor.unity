@@ -2821,6 +2821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData: {fileID: 11400000, guid: 230349bd853c4744984c74b8512f20f4, type: 2}
   weightDisplay: {fileID: 39928129}
+  levelGrid: {fileID: 706968183}
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}
@@ -8069,8 +8070,13 @@ Transform:
   m_GameObject: {fileID: 1438560793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: -110, y: 0, z: 10}
   m_LocalScale: {x: 3, y: 3, z: 1}
+=======
+  m_LocalPosition: {x: -187, y: 0, z: 10}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+>>>>>>> main
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -8121,7 +8127,11 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
+<<<<<<< HEAD
   m_Size: {x: 87.48, y: 21.599998}
+=======
+  m_Size: {x: 41.24, y: 21.599998}
+>>>>>>> main
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
