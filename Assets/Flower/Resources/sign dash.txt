@@ -1,3 +1,3 @@
 [show]
-Hold "Left Shift" to sprint and jump over larger gaps![w]
-Remember, sprinting has a 1-second cooldown![w]
+Hold "Left Shift" to dash and jump over larger gaps![w]
+Remember, dashing has a 1-second cooldown![w]
