@@ -3,19 +3,23 @@
   "WorkspaceRootPath": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|c:\\users\\morri\\onedrive\\\u6587\u4EF6\\github\\game_programming_bbj\\assets\\script\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|c:\\users\\morri\\onedrive\\\u6587\u4EF6\\github\\game_programming_bbj\\assets\\flower\\resources\\start.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|solutionrelative:assets\\flower\\resources\\start.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|c:\\users\\morri\\onedrive\\\u6587\u4EF6\\github\\game_programming_bbj\\assets\\flower\\resources\\portal1.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\assets\\flower\\resources\\portal1.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|solutionrelative:assets\\flower\\resources\\portal1.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|c:\\users\\morri\\onedrive\\\u6587\u4EF6\\github\\game_programming_bbj\\assets\\flower\\resources\\level selector.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\assets\\flower\\resources\\level selector.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|solutionrelative:assets\\flower\\resources\\level selector.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|c:\\users\\morri\\onedrive\\\u6587\u4EF6\\github\\game_programming_bbj\\assets\\flower\\resources\\jump.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\assets\\flower\\resources\\jump.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{50A6230D-1168-9555-B0F2-53AC725B408D}|Assembly-CSharp.csproj|solutionrelative:assets\\flower\\resources\\jump.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
@@ -30,11 +34,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\script\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\PlayerController.cs",
+              "ToolTip": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\script\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\script\\PlayerController.cs",
+              "ViewState": "AgIAAKQAAAAAAAAAAAD4v7YAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T05:08:25.075Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "portal1.txt",
               "DocumentMoniker": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\Flower\\Resources\\portal1.txt",
               "RelativeDocumentMoniker": "Assets\\Flower\\Resources\\portal1.txt",
@@ -42,12 +59,11 @@
               "RelativeToolTip": "Assets\\Flower\\Resources\\portal1.txt",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-11-25T19:34:50.984Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-25T19:34:50.984Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "level selector.txt",
               "DocumentMoniker": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\Flower\\Resources\\level selector.txt",
               "RelativeDocumentMoniker": "Assets\\Flower\\Resources\\level selector.txt",
@@ -55,12 +71,11 @@
               "RelativeToolTip": "Assets\\Flower\\Resources\\level selector.txt",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-11-25T19:34:45.392Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-25T19:34:45.392Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "jump.txt",
               "DocumentMoniker": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\Flower\\Resources\\jump.txt",
               "RelativeDocumentMoniker": "Assets\\Flower\\Resources\\jump.txt",
@@ -68,25 +83,24 @@
               "RelativeToolTip": "Assets\\Flower\\Resources\\jump.txt",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-11-25T19:34:37.868Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-25T19:34:37.868Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "start.txt",
               "DocumentMoniker": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\Flower\\Resources\\start.txt",
               "RelativeDocumentMoniker": "Assets\\Flower\\Resources\\start.txt",
               "ToolTip": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\Flower\\Resources\\start.txt",
               "RelativeToolTip": "Assets\\Flower\\Resources\\start.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2024-11-25T19:33:26.73Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "NewBehaviourScript.cs",
               "DocumentMoniker": "C:\\Users\\morri\\OneDrive\\\u6587\u4EF6\\GitHub\\Game_Programming_BBJ\\Assets\\script\\NewBehaviourScript.cs",
               "RelativeDocumentMoniker": "Assets\\script\\NewBehaviourScript.cs",
