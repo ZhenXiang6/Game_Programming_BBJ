@@ -9,3 +9,4 @@ Click the arrow to switch to "Move Mode". In this mode, you can move blocks or p
 When done, click the arrow again to return to "Place Mode".[w]
 Finally, click "Save & Start" to continue the game.[w]
 Try to reach the high ground ahead.[w]
+If you'd like more details on how to use the blocks, click the help icon in the top right corner. [w]
