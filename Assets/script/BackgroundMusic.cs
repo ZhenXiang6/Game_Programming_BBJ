@@ -4,6 +4,8 @@ public class BackgroundMusic : MonoBehaviour
 {
     private static BackgroundMusic instance;
 
+    private AudioSource audioSource;
+
     void Awake()
     {
         if (instance != null)
@@ -15,9 +17,23 @@ public class BackgroundMusic : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
 
-        if (!GetComponent<AudioSource>().isPlaying)
+        audioSource = GetComponent<AudioSource>();
+        if (!audioSource.isPlaying)
         {
-            GetComponent<AudioSource>().Play();
+            audioSource.Play();
+        }
+    }
+
+    public static BackgroundMusic Instance
+    {
+        get { return instance; }
+    }
+
+    public void SetVolume(float volume)
+    {
+        if (audioSource != null)
+        {
+            audioSource.volume = volume;
         }
     }
 }
