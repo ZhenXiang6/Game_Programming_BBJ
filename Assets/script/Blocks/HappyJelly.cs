@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class HappyJelly : MonoBehaviour
-{
-    private float bounceForce = 12f;  // 彈開的力量
+{ 
+    private float bounceForce = 10f;  // 彈開的力量
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
