@@ -4838,7 +4838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: -19}
+  m_AnchoredPosition: {x: -352, y: 15}
   m_SizeDelta: {x: 68.0403, y: 64.676}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &609190592
@@ -13167,6 +13167,8 @@ MonoBehaviour:
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}
+  - {fileID: 6233273028531904866, guid: 329a9b8dd7474ce41a0cb6f0cd12ef0c, type: 3}
+  - {fileID: 6233273028531904866, guid: 2422591cd89db1047be1f686a873c4e1, type: 3}
   mapContainer: {fileID: 505143536}
 --- !u!4 &1471760177
 Transform:

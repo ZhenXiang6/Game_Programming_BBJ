@@ -22,11 +22,15 @@ public class LevelEditorController : MonoBehaviour
     private List<Tilemap> tilemaps = new List<Tilemap>(); // 存儲所有 Tilemap
 
     public GameObject[] blockPrefabs;
+
+    [Header("UIs")]
     public Transform mapContainer;
     public Button startGameButton;
     public Button clearButton;
     public Button saveMapButton;
     public Button selectModeButton;
+    public GameObject trashBinUI; // 垃圾桶的 UI 區域
+
     public GameObject darkOverlay;          // 暗色遮罩
     public int rotationAngle = 90;
     public float gridSpacing = 1f;
@@ -65,7 +69,6 @@ public class LevelEditorController : MonoBehaviour
         {
             HandleBlockSelection();
             HandleSelectedBlockMovement();
-            HandleBlockDeletion();
         }
         else
         {
@@ -83,6 +86,7 @@ public class LevelEditorController : MonoBehaviour
         {
             // 進入選取模式，顯示暗色遮罩
             darkOverlay.SetActive(true);
+            trashBinUI.SetActive(true);
             selectedBlockPrefab = null;
             if (previewBlock != null)
             {
@@ -93,6 +97,7 @@ public class LevelEditorController : MonoBehaviour
         {
             // 退出選取模式，隱藏暗色遮罩並取消選中
             darkOverlay.SetActive(false);
+            trashBinUI.SetActive(false);
             DeselectBlock();
         }
     }
@@ -147,6 +152,7 @@ public class LevelEditorController : MonoBehaviour
     {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
+
         if (selectedBlock != null)
         {
             Vector3 mousePosition = GetMouseWorldPosition();
@@ -154,13 +160,14 @@ public class LevelEditorController : MonoBehaviour
 
             if (Input.GetMouseButton(0)) // 按住左鍵拖動方塊
             {
+
                 // 使用 OverlapCircle 檢查目標位置是否已有方塊
                 float checkRadius = gridSpacing / 2f * 0.9f;
                 Collider2D overlap = Physics2D.OverlapCircle(targetPosition, checkRadius);
                 if (IsOverlappingTilemap(targetPosition))
                 {
                     Debug.Log("Cannot place block, overlaps with Tilemap.");
-                    return; // 如果與 Tilemap 重疊，禁止放置
+                    return; // 如果與 Tilemap 重疊，禁止移動
                 }
                 // 如果重疊對象為空或者為當前選中方塊本身，則允許移動
                 if (overlap == null || overlap.gameObject == selectedBlock)
@@ -170,6 +177,14 @@ public class LevelEditorController : MonoBehaviour
                 else
                 {
                     Debug.Log("該位置已有方塊，無法移動到該位置。");
+                }
+            }
+            if (Input.GetMouseButtonUp(0)) // 釋放鼠標按鍵時檢查垃圾桶
+            {
+                if (IsOverTrashBin())
+                {
+                    Debug.Log("Block moved to trash bin and deleted.");
+                    DeleteSelectedBlock();
                 }
             }
 
@@ -184,20 +199,28 @@ public class LevelEditorController : MonoBehaviour
             }
         }
     }
-
+    private bool IsOverTrashBin()
+    {
+        RectTransform trashBinRect = trashBinUI.GetComponent<RectTransform>();
+        Vector2 mousePosition = Input.mousePosition;
+        // 判斷鼠標是否在垃圾桶區域內
+        return RectTransformUtility.RectangleContainsScreenPoint(trashBinRect, mousePosition);
+    }
 
     // 刪除選中的方塊
-    void HandleBlockDeletion()
+    private void DeleteSelectedBlock()
     {
-        if (selectedBlock != null && Input.GetKeyDown(KeyCode.Delete))
+        if (selectedBlock != null)
         {
             float blockWeight = selectedBlock.GetComponent<BlockInfo>().weight;
 
             placedPlayerBlocks.Remove(selectedBlock);
             Destroy(selectedBlock);
+            selectedBlock = null;
 
-            // Update weight based on the deleted block
+            // 更新權重
             UpdateWeight(-blockWeight);
+            Debug.Log("Block deleted.");
         }
     }
 
@@ -408,13 +431,11 @@ public class LevelEditorController : MonoBehaviour
 
     public void StartGame()
     {
-        SaveMap();
         SceneManager.LoadScene(levelData.levelName);
     }
     private void OnApplicationQuit()
     {
         ClearMap();
-        SaveMap();
     }
 
 // ----------------------------------------------------------------

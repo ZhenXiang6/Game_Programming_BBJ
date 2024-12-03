@@ -2249,37 +2249,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &155749428
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 155749429}
-  m_Layer: 0
-  m_Name: Placeholder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &155749429
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155749428}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 711, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &157898985
 GameObject:
   m_ObjectHideFlags: 0
@@ -9539,7 +9508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4388fd4133bf5489076f73e7910cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 10
+  bounceForce: 12
 --- !u!1 &1136361214
 GameObject:
   m_ObjectHideFlags: 0
@@ -40648,6 +40617,8 @@ MonoBehaviour:
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}
+  - {fileID: 6233273028531904866, guid: 329a9b8dd7474ce41a0cb6f0cd12ef0c, type: 3}
+  - {fileID: 6233273028531904866, guid: 2422591cd89db1047be1f686a873c4e1, type: 3}
   mapContainer: {fileID: 505143536}
 --- !u!4 &1471760177
 Transform:
@@ -45267,7 +45238,6 @@ SceneRoots:
   - {fileID: 1299032119}
   - {fileID: 1169741201}
   - {fileID: 420109320}
-  - {fileID: 155749429}
   - {fileID: 1962029192}
   - {fileID: 1734291806}
   - {fileID: 1471760177}
