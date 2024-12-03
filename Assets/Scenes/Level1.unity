@@ -3071,8 +3071,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 994037662}
+  m_Children: []
   m_Father: {fileID: 1471760177}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!66 &505143537
@@ -4348,7 +4347,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: -19}
+  m_AnchoredPosition: {x: -352, y: 15}
   m_SizeDelta: {x: 68.0403, y: 64.676}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &609190592
@@ -9865,72 +9864,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 988839071}
   m_CullTransparentMesh: 1
---- !u!1001 &994037661
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 505143536}
-    m_Modifications:
-    - target: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -30.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -187.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3334188273914085337, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_UsedByComposite
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-      propertyPath: m_Name
-      value: Solid Ground
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
---- !u!4 &994037662 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2270966491084189808, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
-  m_PrefabInstance: {fileID: 994037661}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1014443303
 GameObject:
   m_ObjectHideFlags: 0
@@ -12246,6 +12179,8 @@ MonoBehaviour:
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}
+  - {fileID: 6233273028531904866, guid: 329a9b8dd7474ce41a0cb6f0cd12ef0c, type: 3}
+  - {fileID: 6233273028531904866, guid: 2422591cd89db1047be1f686a873c4e1, type: 3}
   mapContainer: {fileID: 505143536}
 --- !u!4 &1471760177
 Transform:
