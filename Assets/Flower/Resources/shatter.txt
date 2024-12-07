@@ -1,0 +1,2 @@
+[show]
+The disappearing block can simultaneously act as both a disappearing floor and a door that only disappears when touched! [w]

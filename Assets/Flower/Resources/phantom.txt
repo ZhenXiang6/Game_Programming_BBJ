@@ -1,0 +1,2 @@
+[show]
+This is a block that appears and disappears over time. [w]

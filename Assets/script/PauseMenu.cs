@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject confirmationPanel; // 確認視窗
     public string mainMenuSceneName = "MainMenu"; // 主選單場景名稱
-    public LevelData levelData;
+    public string editorSceneName = "EditorScene"; // 編輯器場景名稱
 
     void Update()
     {
@@ -63,7 +63,7 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Loading Editor Scene...");
         Resume();
-        SceneManager.LoadScene(levelData.levelName + "_editor");
+        SceneManager.LoadScene(editorSceneName);
     }
 
     public void ShowConfirmationPanel()
