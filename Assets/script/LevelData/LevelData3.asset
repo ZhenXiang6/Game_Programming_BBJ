@@ -16,3 +16,7 @@ MonoBehaviour:
   maxStars: 3
   earnedStars: 0
   portalPosition: {fileID: 0}
+  weightLimit: 20
+  get_one_star: 0
+  get_two_stars: 0
+  get_three_stars: 0

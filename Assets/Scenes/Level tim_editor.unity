@@ -4521,7 +4521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData: {fileID: 11400000, guid: 150b6ee2e9cd73248811b175266cb3fd, type: 2}
   weightDisplay: {fileID: 39928129}
-  levelGrid: {fileID: 0}
+  levelGrid: {fileID: 387154926}
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}

@@ -8,17 +8,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: d356295ebbc57e24f9a5d9c603f702d6
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: ca03339ca5a3a804a9b41f972bfb33b7
   - enabled: 1
     path: Assets/Scenes/Level Selector.unity
     guid: 9fda1c25686413b4d8bba9806d149b6b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level1_editor.unity
     guid: 274ac93aead865a45a5522c193db1b4e
   - enabled: 1
-    path: Assets/Scenes/Level2_editor.unity
+    path: Assets/Scenes/JosephLevel_editor.unity
     guid: d518a77de93467645b19791b420cea71
   - enabled: 1
     path: Assets/Scenes/Level2.unity
@@ -32,7 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial Level_editor.unity
     guid: f97bdbc820ee18249a976107942ba1a5
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level1_guide.unity
     guid: 5f21683ed89dc3740899f3b77370003c
   - enabled: 1
@@ -44,4 +44,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level tim_editor.unity
     guid: c3e42863c2ff180458d09f3fcdaac27b
+  - enabled: 1
+    path: Assets/Scenes/JosephLevel.unity
+    guid: 6bd14ed615fbf0c4babb19aa12c06a6b
+  - enabled: 0
+    path: Assets/Scenes/Level 100.unity
+    guid: 6eadef2e8db6d6b4eae63ccd07154664
+  - enabled: 1
+    path: Assets/Scenes/Level2_editor.unity
+    guid: d5c3a31c03a771b428ccdb0dc5b81621
+  - enabled: 1
+    path: Assets/Scenes/Level2_editor 1.unity
+    guid: efe9221f8ec8e4b4f8fe56169dfdda9a
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: 7b312143708d13d4cadf6dbf11bbd8bf
+  - enabled: 1
+    path: Assets/Scenes/Level3_editor.unity
+    guid: 5a2879047bbe01b40a5cb225d2b46cd5
   m_configObjects: {}

@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource dashFX;
 
     public DiedMenu diedMenu;
+
     void Start()
     {
         blockBuilder = GetComponent<BlockBuilder>();
@@ -65,8 +66,14 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleJump();
         HandleFalling();
-        HandleDash();    // 处理 Dash
+        HandleDash();
         FlipSprite();
+
+        // 按下 R 鍵重新回到起點
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Respawn();
+        }
     }
 
     void HandleMovement()
@@ -85,6 +92,7 @@ public class PlayerController : MonoBehaviour
 
     void HandleJump()
     {
+        // 按下跳躍鍵立即起跳
         if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)) && isGrounded && PlayerCanMove && !isDashing)
         {
             jumpFX.Play(0);
@@ -94,6 +102,13 @@ public class PlayerController : MonoBehaviour
                 anim.SetTrigger("Jump");
             }
             Debug.Log("Jump Triggered");
+        }
+
+        // 放開跳躍鍵時，如仍在上升，立刻結束上升，開始下落
+        if ((Input.GetButtonUp("Jump") || Input.GetKeyUp(KeyCode.W)) && rb.velocity.y > 0)
+        {
+            // 削減角色的向上速度，讓角色立即往下落
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
         }
     }
 
