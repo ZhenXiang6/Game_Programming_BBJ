@@ -12438,7 +12438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6227867e92563814da128c282ff240ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 11400000, guid: d97e132a982731743889cf8af91ea3c2, type: 2}
+  levelData: {fileID: 11400000, guid: 2fc4f8be0b3924d4dbaf5ac314980acd, type: 2}
   blockPrefabs:
   - {fileID: 6233273028531904866, guid: 0bb2002b6fdcf804fb21242c5c118fa4, type: 3}
   - {fileID: 6233273028531904866, guid: 91b1ca8669a8ba54caf5bcb1ba9c3e1a, type: 3}
@@ -13118,7 +13118,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 1208363398}
   confirmationPanel: {fileID: 287300478}
   mainMenuSceneName: Main
-  editorSceneName: EditorScene
+  editorSceneName: Level3_editor
 --- !u!114 &1635850335
 MonoBehaviour:
   m_ObjectHideFlags: 0
