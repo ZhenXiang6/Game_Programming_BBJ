@@ -179,8 +179,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click on the finger to switch to "Move Mode." In this mode, you can move
-    placed blocks and use the Del key to delete unwanted blocks.
   m_text: Click the finger icon to enter "Move Mode." Here, you can move blocks and
     press Trash bin to remove unwanted ones.
   m_isRightToLeft: 0
@@ -2589,8 +2587,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\nUse the scroll wheel to zoom in and out. \nHold down the Left Alt key
-    to drag the map and adjust the viewpoint."
   m_text: '
 
     Scroll to zoom in or out.
@@ -5841,9 +5837,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pay attention to the "Weight" in the top left corner, indicating your remaining
-    mana. If it reaches zero, you can't place blocks, and each block consumes different
-    mana.
   m_text: "Keep an eye on the \"Weight\" in the top left\u2014it shows your mana.
     If it hits zero, you can't place blocks. Each block consumes different amounts
     of mana."
@@ -8534,10 +8527,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Click on the target block, then click on the destination position to move
-    the selected block. Also, you can use Del to remove it
-
-    .'
   m_text: Click a block to select it, then click a destination to move it.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -10955,8 +10944,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click the finger icon again to exit "Move Mode", then save and start the
-    game by using the buttons in the top right corner.
   m_text: Click save and start to continue.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
