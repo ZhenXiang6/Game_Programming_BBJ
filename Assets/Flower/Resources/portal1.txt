@@ -1,5 +1,4 @@
 [show]
 Did you notice that the character can only jump up to 2 blocks high![w]
 But besides regular blocks, there are more special blocks to reach your goals.[w]
-Throughout your adventure, you'll encounter and manipulate various different blocks![w]
 Enter the portal ahead, and I'll teach you how to control the blocks![w]

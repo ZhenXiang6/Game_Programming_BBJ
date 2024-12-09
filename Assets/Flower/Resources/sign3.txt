@@ -1,5 +1,3 @@
 [show]
 Did you notice the character can only jump up to 2 blocks high![w]
-But besides placing regular blocks, you can use white bouncy blocks to reach higher places.[w]
-So, try different ways to achieve the same goal and find the placement method that suits you best![w]
 Begin your adventure through the portal ahead![w]

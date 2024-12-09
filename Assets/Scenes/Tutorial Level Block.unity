@@ -18470,7 +18470,7 @@ MonoBehaviour:
   jumpFX: {fileID: 1920907497}
   deathFX: {fileID: 1957276471}
   dashFX: {fileID: 79805305}
-  diedMenu: {fileID: 0}
+  diedMenu: {fileID: 1219798544}
 --- !u!95 &1945100935
 Animator:
   serializedVersion: 5

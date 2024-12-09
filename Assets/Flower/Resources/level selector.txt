@@ -1,4 +1,2 @@
 [show]
 If you haven't completed the tutorial yet, use the portal behind me![w]
-If you're already familiar with the game, the left is Level 1 and the right is Level 2.[w]
-Simply approach a portal and press "E" to enter the level![w]
