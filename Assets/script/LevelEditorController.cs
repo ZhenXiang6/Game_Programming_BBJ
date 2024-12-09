@@ -399,7 +399,6 @@ public class LevelEditorController : MonoBehaviour
                 GameObject newBlock = Instantiate(prefab, blockData.position, Quaternion.Euler(0, 0, blockData.rotation), mapContainer);
                 placedPlayerBlocks.Add(newBlock);
             }
-            
 
         }
         SetWeight(mapData.weightSum);
@@ -440,7 +439,6 @@ public class LevelEditorController : MonoBehaviour
         ClearMap();
     }
 
-// ----------------------------------------------------------------
     // ----------------------------------------------------------------
 
     public void UpdateWeight(float weightChange)
