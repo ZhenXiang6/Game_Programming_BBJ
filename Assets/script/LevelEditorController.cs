@@ -400,6 +400,7 @@ public class LevelEditorController : MonoBehaviour
                 placedPlayerBlocks.Add(newBlock);
             }
             
+
         }
         SetWeight(mapData.weightSum);
     }
@@ -431,6 +432,7 @@ public class LevelEditorController : MonoBehaviour
 
     public void StartGame()
     {
+        SaveMap();
         SceneManager.LoadScene(levelData.levelName);
     }
     private void OnApplicationQuit()
@@ -439,6 +441,7 @@ public class LevelEditorController : MonoBehaviour
     }
 
 // ----------------------------------------------------------------
+    // ----------------------------------------------------------------
 
     public void UpdateWeight(float weightChange)
     {
