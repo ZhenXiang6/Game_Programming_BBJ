@@ -15310,6 +15310,7 @@ MonoBehaviour:
   deathFX: {fileID: 1957276471}
   dashFX: {fileID: 79805305}
   diedMenu: {fileID: 0}
+  diedMenu: {fileID: 9269519}
 --- !u!95 &1945100935
 Animator:
   serializedVersion: 5
