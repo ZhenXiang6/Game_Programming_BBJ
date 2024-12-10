@@ -2822,9 +2822,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aedccb3ebd98184488fbe30ac2bd204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endMenuUI: {fileID: 0}
-  text: {fileID: 0}
-  getStars: {fileID: 0}
+  endMenuUI: {fileID: 1694026726}
+  text: {fileID: 1463828734}
+  getStars: {fileID: 910512036}
   leveldata: {fileID: 11400000, guid: 2fc4f8be0b3924d4dbaf5ac314980acd, type: 2}
 --- !u!61 &211254254
 BoxCollider2D:
@@ -11608,7 +11608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.0499878, y: 0}
+  m_AnchoredPosition: {x: 2.0500488, y: 0}
   m_SizeDelta: {x: -717.4813, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1395477505
@@ -15309,7 +15309,7 @@ MonoBehaviour:
   jumpFX: {fileID: 1920907497}
   deathFX: {fileID: 1957276471}
   dashFX: {fileID: 79805305}
-  diedMenu: {fileID: 0}
+  diedMenu: {fileID: 9269519}
 --- !u!95 &1945100935
 Animator:
   serializedVersion: 5
